@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pricing — Kalmly</title>
+<meta name="description" content="Kalmly pricing: Solo €39, Grow €79, Scale €149 a month. 7-day free trial, cancel anytime, two months free on annual plans.">
+<link rel="canonical" href="https://kalmly.io/pricing/">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta property="og:title" content="Kalmly pricing"><meta property="og:description" content="From €39 a month. 7-day free trial, read-only, cancel anytime."><meta property="og:image" content="https://kalmly.io/og.png"><meta property="og:url" content="https://kalmly.io/pricing/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Mockup D: warm off-white + charcoal + one orange accent; restrained headline; a realistic, denser light dashboard as the product shot. Single-theme on purpose. */
+:root{
+  --paper:#F6F3EE;--card:#FFFFFF;--ink:#1B1917;--muted:#625B53;--rule:#E4DED5;--accent:#D1491F;--accent-ink:#FFFFFF;
+  --ok:#2E7A4F;--ok-bg:#E4F1E8;--watch:#9A5B10;--watch-bg:#F6E8CF;--act:#A4362A;--act-bg:#F8DCD7;
+  --display:"Outfit","Helvetica Neue",Arial,sans-serif;--body:"Manrope",-apple-system,"Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--body);padding-block:0 40px;padding-inline:20px}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:inherit}
+.note{font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--rule);padding:10px 0;margin-bottom:8px;letter-spacing:.02em}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:800 1.35rem var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo b{color:var(--accent)}
+.logo{font-weight:700;letter-spacing:-.03em}
+.navlinks{display:flex;gap:22px;align-items:center;font-size:.95rem;color:var(--muted)}
+.navlinks a{text-decoration:none}
+.btn{display:inline-block;padding:13px 22px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;border:1.5px solid transparent;white-space:nowrap}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.quiet{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn.small{padding:9px 14px;font-size:.9rem}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.025em;line-height:1.05;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:700;letter-spacing:-.03em;line-height:1.08}
+h2{font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:700;line-height:1.3}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding:36px 0 56px}
+.hero .lead{font-size:1.12rem;color:var(--muted);max-width:36ch;margin:16px 0 24px}
+.hero .lead strong{color:var(--ink);font-weight:600}
+.hero .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hero small{display:block;color:var(--muted);margin-top:12px;font-size:.9rem}
+/* the dashboard as the hero visual */
+.dash{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:0;box-shadow:0 1px 2px rgba(27,25,23,.05);min-width:0;font-size:.86rem}
+.dash .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
+.dash .bar b{font:700 .95rem var(--display);color:var(--ink);letter-spacing:-.02em}
+.dash .sec{padding:12px 14px;border-bottom:1px solid var(--rule)}
+.dash .sec:last-child{border-bottom:0}
+.dash .lbl{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stats .v{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
+.stats .k{font-size:.7rem;color:var(--muted)}
+.stats .d{font-size:.7rem;font-variant-numeric:tabular-nums}
+.up{color:var(--ok)}.down{color:var(--act)}.flat{color:var(--muted)}
+.today{display:flex;gap:10px;align-items:flex-start}
+.today .mark{width:18px;height:18px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;font-size:.7rem;font-weight:700;flex:none;margin-top:2px}
+.today b{display:block;font-size:.95rem}
+.today p{margin:2px 0 0;color:var(--muted);font-size:.84rem;max-width:none}
+.next{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:8px 10px;margin-top:8px}
+.next b{font-size:.86rem}
+.next span{font-size:.74rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.dash .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:12px}
+.dash .top b{font-family:var(--display);font-size:1.05rem}
+.dash .top span{font-size:.78rem;color:var(--muted)}
+.verdict{border-left:4px solid var(--act);padding:10px 12px;background:var(--paper);border-radius:0 8px 8px 0;font-size:.92rem;line-height:1.4}
+.verdict .lbl{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.tile{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;min-width:0}
+.tile .k{font-size:.72rem;color:var(--muted)}
+.tile .v{font-family:var(--display);font-size:1.35rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
+.tile .s{font-size:.72rem;color:var(--muted)}
+.tile.good .v{color:var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
+td,th{text-align:left;padding:5px 4px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.r,th.r{text-align:right}
+th{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.chip{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:999px;font-weight:600}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.watch{background:var(--watch-bg);color:var(--watch)}.chip.act{background:var(--act-bg);color:var(--act)}
+.todo{margin-top:10px;font-size:.86rem;border-top:1px solid var(--rule);padding-top:10px}
+.todo b{color:var(--accent);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+/* sections */
+section{padding:48px 0;border-top:1px solid var(--rule)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.three>div{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:24px 22px}
+.ic{width:44px;height:44px;border-radius:10px;background:#F7E6DE;color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+.ic svg{width:22px;height:22px}
+.proofcard{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:32px 28px}
+.proof .num{color:var(--accent)}
+.three p{color:var(--muted);margin:8px 0 0;font-size:1rem;max-width:34ch}
+.three .n{display:none}
+.proof{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px;align-items:end}
+.proof p{color:var(--muted);margin:10px 0 0;max-width:40ch}
+.num{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.lab{color:var(--muted);font-size:.95rem;margin-top:4px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:26px}
+.steps p{color:var(--muted);margin:8px 0 0;font-size:1rem}
+.pricing{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+.pricing .muted{color:var(--muted);max-width:44ch;margin-top:12px}
+.price{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px}
+.amount{font-family:var(--display);font-size:3rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+.amount small{font:500 1rem var(--body);color:var(--muted);letter-spacing:0}
+.price ul{list-style:none;padding:0;margin:18px 0 22px}
+.price li{padding:8px 0;border-top:1px solid var(--rule);font-size:.98rem}
+.price li:first-child{border-top:0}
+.alt{font-size:.88rem;color:var(--muted);margin:12px 0 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+summary{cursor:pointer;font-weight:600;font-family:var(--display);font-size:1.05rem}
+details p{color:var(--muted);margin:8px 0 0;max-width:65ch}
+.final{text-align:left;padding:56px 0}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.88rem;padding:24px 0;border-top:1px solid var(--rule)}
+
+/* the demo conversation */
+.q{display:flex;gap:10px;align-items:baseline;padding:4px 0 10px;font-size:.95rem}
+.q .who{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex:none;width:34px}
+.q .qt{font-weight:600}
+#demo.animating .q .qt::after{content:"";display:inline-block;width:2px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+#demo.animating .q.done .qt::after{display:none}
+.a{border-left:2px solid var(--rule);padding:4px 0 6px 12px;margin:0 0 14px 2px}
+.a .ans{margin:10px 0 0;font-size:.9rem;max-width:none;color:var(--ink)}
+.a table{margin-top:2px}
+#demo.animating [data-step]{opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
+#demo.animating [data-step].show{opacity:1;transform:none}
+.replay{text-align:right;font-size:.78rem}
+.replay a{color:var(--muted)}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){[data-step]{opacity:1;transform:none}.q .qt::after{display:none}}
+
+@media (max-width:820px){.hero,.pricing{grid-template-columns:1fr}.three,.steps{grid-template-columns:1fr}.proof{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:repeat(3,1fr)}.navlinks a:not(.btn){display:none}}
+@media (max-width:480px){.tiles{grid-template-columns:1fr 1fr}}
+
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;align-items:start}
+.plan{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:26px 24px;position:relative}
+.plan.pop{border-color:var(--ink);box-shadow:0 10px 30px -22px rgba(27,25,23,.5)}
+.plan .tag{position:absolute;top:-12px;left:24px;background:var(--ink);color:var(--paper);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:700}
+.plan h3{font:700 1.3rem var(--display);letter-spacing:-.02em;margin:0 0 4px}
+.plan .who{color:var(--muted);font-size:.95rem;min-height:2.6em}
+.plan .amount{font:800 2.6rem/1 var(--display);letter-spacing:-.03em;margin:16px 0 2px;font-variant-numeric:tabular-nums}
+.plan .amount small{font:500 .95rem var(--body);color:var(--muted);letter-spacing:0}
+.plan .per{font-size:.85rem;color:var(--muted);min-height:1.4em}
+.plan ul{list-style:none;padding:0;margin:18px 0 20px}
+.plan li{padding:7px 0;border-top:1px solid var(--rule);font-size:.95rem}
+.plan li:first-child{border-top:0}
+.plan .btn{width:100%;text-align:center;box-sizing:border-box}
+.toggle{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:4px;background:var(--card);margin-top:22px}
+.toggle button{border:0;background:transparent;padding:8px 16px;border-radius:999px;font:600 .95rem var(--body);color:var(--muted);cursor:pointer}
+.toggle button.on{background:var(--ink);color:var(--paper)}
+.toggle .save{color:var(--accent);font-weight:700}
+.allin{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin-top:18px;color:var(--muted);font-size:.95rem}
+.allin div::before{content:"✓";color:var(--ok);font-weight:700;margin-right:8px}
+@media (max-width:820px){.plans,.allin{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="logo" href="/">kalm<b>ly</b></a>
+  <div class="navlinks"><a href="/#how">How it works</a><a href="/pricing/" style="color:var(--ink)">Pricing</a><a href="/login">Log in</a><a class="btn primary small" href="/start">Start free</a></div>
+</nav>
+
+<section class="hero" style="border-top:0;display:block;padding-bottom:24px">
+  <h1 style="max-width:16ch">Less than one wasted ad day a month.</h1>
+  <p class="lead" style="max-width:48ch;margin-top:16px">Every plan: the daily check judged on your real sales, the question box, creative comparisons, and read-only access. Pick by how many ad accounts you run. 7 days free, then monthly, cancel anytime.</p>
+  <div class="toggle" role="group" aria-label="Billing period">
+    <button type="button" id="bill-month" class="on">Monthly</button>
+    <button type="button" id="bill-year">Yearly <span class="save">· 2 months free</span></button>
+  </div>
+</section>
+
+<div class="plans" id="plans">
+  <div class="plan">
+    <h3>Solo</h3>
+    <div class="who">One business, one ad account.</div>
+    <div class="amount" data-m="39" data-y="390">€39<small> /month</small></div>
+    <div class="per" data-pm="billed monthly" data-py="€390 billed yearly"></div>
+    <ul>
+      <li>1 Meta ad account</li>
+      <li>1 shop connection</li>
+      <li>Daily check + question box</li>
+      <li>Creative comparisons</li>
+      <li>Email or Telegram delivery</li>
+    </ul>
+    <a class="btn primary" data-plan="solo" href="/start?plan=solo">Start free 7 days</a>
+  </div>
+  <div class="plan pop">
+    <span class="tag">Most popular</span>
+    <h3>Grow</h3>
+    <div class="who">Several brands, cities or shops.</div>
+    <div class="amount" data-m="79" data-y="790">€79<small> /month</small></div>
+    <div class="per" data-pm="billed monthly" data-py="€790 billed yearly"></div>
+    <ul>
+      <li>Up to 3 ad accounts</li>
+      <li>3 shop connections</li>
+      <li>Everything in Solo</li>
+      <li>Weekly summary across accounts</li>
+      <li>Anonymous industry benchmarks</li>
+    </ul>
+    <a class="btn primary" data-plan="grow" href="/start?plan=grow">Start free 7 days</a>
+  </div>
+  <div class="plan">
+    <h3>Scale</h3>
+    <div class="who">Freelancers and small agencies.</div>
+    <div class="amount" data-m="149" data-y="1490">€149<small> /month</small></div>
+    <div class="per" data-pm="billed monthly" data-py="€1,490 billed yearly"></div>
+    <ul>
+      <li>Up to 10 ad accounts</li>
+      <li>10 shop connections</li>
+      <li>Everything in Grow</li>
+      <li>One dashboard per client, one login for you</li>
+      <li>Priority answers</li>
+    </ul>
+    <a class="btn primary" data-plan="scale" href="/start?plan=scale">Start free 7 days</a>
+  </div>
+</div>
+<p class="muted" style="margin-top:14px;font-size:.9rem">Prices exclude VAT. Fair use: Solo covers up to €5,000 a month in ad spend per account, Grow and Scale up to €20,000; above that we'll talk. Extra ad account on any plan: €15 a month.</p>
+
+<section>
+  <h2>Every plan includes</h2>
+  <div class="allin">
+    <div>A check every morning, judged on real sales ÷ ad spend</div>
+    <div>Scale / hold / change per ad set, with exact amounts</div>
+    <div>Which creative sells and what the next one should be</div>
+    <div>Questions answered from your live numbers (10 a day)</div>
+    <div>Billing and delivery alerts before they cost you a day</div>
+    <div>Read-only: nothing changes without you</div>
+  </div>
+</section>
+
+<section>
+  <h2>Compared with the alternatives</h2>
+  <div class="three">
+    <div><h3>An agency or freelancer</h3><p>€500 to €1,500 a month for a weekly look at your account. Kalmly looks every day, for the price of one coffee a week.</p></div>
+    <div><h3>Doing it yourself in Ads Manager</h3><p>Free, and the most expensive option: every reactive edit resets Meta's learning. Kalmly is the calm second opinion that says "leave it".</p></div>
+    <div><h3>Ads analytics tools</h3><p>They show you more numbers. Kalmly gives you the decision, in one sentence, connected to what actually sold.</p></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Quick answers</h2>
+  <div style="margin-top:14px">
+  <details><summary>What happens after the 7 days?</summary><p>Your card is charged for the plan you picked. Cancel before day 7 from your page and nothing is charged.</p></details>
+  <details><summary>Can I switch plans?</summary><p>Yes, any time from "Manage subscription" on your page. Upgrades apply immediately; downgrades at the next renewal.</p></details>
+  <details><summary>Do I need a shop connection?</summary><p>No. Without one, Kalmly judges on Meta's own numbers and says so. With one, every verdict is based on real sales, which is what makes it reliable.</p></details>
+  <details><summary>Is there a plan for agencies with more than 10 clients?</summary><p>Email hello@kalmly.io; we'll set it up by hand.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <h2>Know when to act. Know when to leave it alone.</h2>
+  <div style="margin-top:20px"><a class="btn primary" href="/start?plan=grow">Start free 7 days</a></div>
+</section>
+
+<footer><div>© 2026 Kalmly · Netherlands</div><div>hello@kalmly.io · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></div></footer>
+</div>
+<script>
+(function(){
+  var yearly = false, bm = document.getElementById("bill-month"), by = document.getElementById("bill-year");
+  function render(){
+    bm.classList.toggle("on", !yearly); by.classList.toggle("on", yearly);
+    document.querySelectorAll("#plans .plan").forEach(function(p){
+      var a = p.querySelector(".amount"), per = p.querySelector(".per"), btn = p.querySelector("a[data-plan]");
+      var m = a.getAttribute("data-m"), y = a.getAttribute("data-y");
+      a.innerHTML = yearly ? "€" + Math.round(y / 12) + "<small> /month</small>" : "€" + m + "<small> /month</small>";
+      per.textContent = yearly ? per.getAttribute("data-py") : per.getAttribute("data-pm");
+      btn.href = "/start?plan=" + btn.getAttribute("data-plan") + (yearly ? "&billing=year" : "");
+    });
+  }
+  bm.addEventListener("click", function(){ yearly = false; render(); });
+  by.addEventListener("click", function(){ yearly = true; render(); });
+  render();
+  var h = location.hostname;
+  if (h.endsWith("kalmly.io") && h.indexOf("app.") !== 0 || h.endsWith("github.io")) {
+    document.querySelectorAll('a[href^="/start"],a[href^="/login"],a[href^="/privacy"],a[href^="/terms"]').forEach(function(a){ a.href = "https://app.kalmly.io" + a.getAttribute("href"); });
+  }
+})();
+</script>
+</body>
+</html>
