@@ -113,13 +113,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:
 .q{display:flex;gap:10px;align-items:baseline;padding:4px 0 10px;font-size:.95rem}
 .q .who{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex:none;width:34px}
 .q .qt{font-weight:600}
-.q .qt::after{content:"";display:inline-block;width:2px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
-.q.done .qt::after{display:none}
+#demo.animating .q .qt::after{content:"";display:inline-block;width:2px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+#demo.animating .q.done .qt::after{display:none}
 .a{border-left:2px solid var(--rule);padding:4px 0 6px 12px;margin:0 0 14px 2px}
 .a .ans{margin:10px 0 0;font-size:.9rem;max-width:none;color:var(--ink)}
 .a table{margin-top:2px}
-[data-step]{opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
-[data-step].show{opacity:1;transform:none}
+#demo.animating [data-step]{opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
+#demo.animating [data-step].show{opacity:1;transform:none}
 .replay{text-align:right;font-size:.78rem}
 .replay a{color:var(--muted)}
 @keyframes blink{50%{opacity:0}}
@@ -145,9 +145,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:
     <small>€29/month after the trial · read-only access · cancel anytime</small>
   </div>
   <div class="dash" aria-label="Example of asking Kalmly about today's ads" id="demo">
-    <div class="bar"><b>Fika Ceramics</b><span>Tuesday 6 Oct · live numbers</span></div>
+    <div class="bar"><b>Fika Ceramics</b><span><span id="demo-date">Today</span> · live numbers</span></div>
     <div class="sec">
-      <div class="q" data-step="1"><span class="who">You</span><span class="qt" data-text="What's the status of my ads today?"></span></div>
+      <div class="q" data-step="1"><span class="who">You</span><span class="qt" data-text="What's the status of my ads today?">What's the status of my ads today?</span></div>
       <div class="a" data-step="2">
         <div class="lbl">7 days to yesterday · judged on shop revenue</div>
         <div class="stats">
@@ -158,7 +158,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:
         </div>
         <p class="ans">Healthy. Spend is up 4% and revenue up 10% on last week, so scaling is working. One ad set is tiring: Vases, seen 2.7 times per person and its click rate is down 31%.</p>
       </div>
-      <div class="q" data-step="3"><span class="who">You</span><span class="qt" data-text="What should I scale, and what should I change?"></span></div>
+      <div class="q" data-step="3"><span class="who">You</span><span class="qt" data-text="What should I scale, and what should I change?">What should I scale, and what should I change?</span></div>
       <div class="a" data-step="4">
         <table>
           <tr><th>Ad set</th><th class="r">Spend</th><th class="r">Return</th><th>Do</th></tr>
@@ -250,10 +250,12 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:
     function tick(){ el.textContent = text.slice(0, ++k); if (k < text.length) timers.push(setTimeout(tick, 28)); else { q.classList.add("done"); done(); } }
     tick();
   }
+  var demo = document.getElementById("demo");
   function run(){
     timers.forEach(clearTimeout); timers = [];
+    if (reduce) { demo.classList.remove("animating"); return; }
+    demo.classList.add("animating");
     steps.forEach(function(s){ s.classList.remove("show"); s.classList.remove("done"); });
-    if (reduce) { steps.forEach(function(s){ s.classList.add("show"); var el = s.querySelector(".qt"); if (el) el.textContent = el.getAttribute("data-text"); s.classList.add("done"); }); return; }
     var i = 0;
     function next(delay){
       timers.push(setTimeout(function(){
@@ -265,6 +267,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:
     }
     next(600);
   }
+  try { document.getElementById("demo-date").textContent = new Date().toLocaleDateString("en-GB", {weekday:"long", day:"numeric", month:"short"}); } catch (e) {}
   document.getElementById("replay").addEventListener("click", function(e){ e.preventDefault(); run(); });
   run();
 })();
