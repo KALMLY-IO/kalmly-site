@@ -30,16 +30,19 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
  {"@type":"Question","name":"Do I give Kalmly my Facebook login?","acceptedAnswer":{"@type":"Answer","text":"No. You connect with view rights only. No password, no edit rights, removable in one click."}},
  {"@type":"Question","name":"Does Kalmly change my ads for me?","acceptedAnswer":{"@type":"Answer","text":"No. Kalmly tells you the exact edit and the reason; you make it in Ads Manager."}},
- {"@type":"Question","name":"Who is Kalmly for?","acceptedAnswer":{"@type":"Answer","text":"Businesses that run their own Meta ads at €10 to €200 a day and want more sales from them: tours, venues, shops, studios, e-commerce."}},
- {"@type":"Question","name":"Does Kalmly support Google Ads or TikTok?","acceptedAnswer":{"@type":"Answer","text":"Meta only, for now."}}]}
+ {"@type":"Question","name":"Why Meta only?","acceptedAnswer":{"@type":"Answer","text":"Because a shallow tool for five platforms helps nobody. Meta is where small businesses spend, and judging Meta ads on real sales properly takes all of our attention."}},
+ {"@type":"Question","name":"Why read-only, forever?","acceptedAnswer":{"@type":"Answer","text":"The moment software can edit a budget, a wrong guess costs real money and you cannot see why. Kalmly makes the case with the numbers; the owner makes the change."}},
+ {"@type":"Question","name":"Why one decision instead of a dashboard of charts?","acceptedAnswer":{"@type":"Answer","text":"Ads Manager already is a dashboard of charts. What an owner needs at eight in the morning is one sentence: change this, or leave it."}},
+ {"@type":"Question","name":"Who is Kalmly for?","acceptedAnswer":{"@type":"Answer","text":"Businesses that run their own Meta ads at €10 to €200 a day and want more sales from them: tours, venues, shops, studios, e-commerce."}}]}
 </script>
 <meta name="description" content="Kalmly checks your Meta ads every morning, connects them to your real sales, and tells you whether to change something or leave it alone. Read-only. From €39/month.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Mockup D: warm off-white + charcoal + one orange accent; restrained headline; a realistic, denser light dashboard as the product shot. Single-theme on purpose. */
+/* Warm off-white + charcoal + one orange accent. Two radius tokens only: 8px controls, 12px cards. Single-theme on purpose. */
 :root{
   --paper:#F6F3EE;--card:#FFFFFF;--ink:#1B1917;--muted:#625B53;--rule:#E4DED5;--accent:#D1491F;--accent-ink:#FFFFFF;
   --ok:#2E7A4F;--ok-bg:#E4F1E8;--watch:#9A5B10;--watch-bg:#F6E8CF;--act:#A4362A;--act-bg:#F8DCD7;
+  --r-ctl:8px;--r-card:12px;
   --display:"Outfit","Helvetica Neue",Arial,sans-serif;--body:"Manrope",-apple-system,"Segoe UI",system-ui,sans-serif;
   color-scheme:light;
 }
@@ -47,14 +50,12 @@
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--body);padding-block:0 40px;padding-inline:20px}
 .wrap{max-width:1080px;margin:0 auto}
 a{color:inherit}
-.note{font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--rule);padding:10px 0;margin-bottom:8px;letter-spacing:.02em}
 nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
-.logo{font:800 1.35rem var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo{font:700 1.35rem var(--display);letter-spacing:-.03em;text-decoration:none}
 .logo b{color:var(--accent)}
-.logo{font-weight:700;letter-spacing:-.03em}
 .navlinks{display:flex;gap:22px;align-items:center;font-size:.95rem;color:var(--muted)}
 .navlinks a{text-decoration:none}
-.btn{display:inline-block;padding:13px 22px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;border:1.5px solid transparent;white-space:nowrap}
+.btn{display:inline-block;padding:13px 22px;border-radius:var(--r-ctl);font-weight:700;text-decoration:none;font-size:1rem;border:1.5px solid transparent;white-space:nowrap}
 .btn.primary{background:var(--accent);color:var(--accent-ink)}
 .btn.quiet{border-color:var(--ink);color:var(--ink);background:transparent}
 .btn.small{padding:9px 14px;font-size:.9rem}
@@ -62,68 +63,132 @@ h1,h2,h3{font-family:var(--display);letter-spacing:-.025em;line-height:1.05;marg
 h1{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:700;letter-spacing:-.03em;line-height:1.08}
 h2{font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700}
 h3{font-size:1.15rem;font-weight:700;line-height:1.3}
+.muted{color:var(--muted)}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding:36px 0 56px}
 .hero .lead{font-size:1.12rem;color:var(--muted);max-width:36ch;margin:16px 0 24px}
 .hero .lead strong{color:var(--ink);font-weight:600}
 .hero .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .hero small{display:block;color:var(--muted);margin-top:12px;font-size:.9rem}
-/* the dashboard as the hero visual */
-.dash{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:0;box-shadow:0 1px 2px rgba(27,25,23,.05);min-width:0;font-size:.86rem}
-.dash .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
+.demo-link{margin-top:14px}
+/* "works with": monochrome text wordmarks at one height, no third-party logo files */
+.works{margin-top:22px;font-size:.82rem;color:var(--muted)}
+.works .marks{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;margin-top:6px}
+.works .wm{font:700 1.05rem/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.02em;color:var(--ink);opacity:.6}
+.works .own{font-size:.82rem;color:var(--muted)}
+
+/* the hero visual: a replica of the app's Today page */
+.dash{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-card);box-shadow:0 1px 2px rgba(27,25,23,.05);min-width:0;font-size:.84rem;overflow:hidden}
+.dash .bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--rule);font-size:.78rem;color:var(--muted)}
 .dash .bar b{font:700 .95rem var(--display);color:var(--ink);letter-spacing:-.02em}
 .dash .sec{padding:12px 14px;border-bottom:1px solid var(--rule)}
 .dash .sec:last-child{border-bottom:0}
-.dash .lbl{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.stats .v{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
-.stats .k{font-size:.7rem;color:var(--muted)}
-.stats .d{font-size:.7rem;font-variant-numeric:tabular-nums}
-.up{color:var(--ok)}.down{color:var(--act)}.flat{color:var(--muted)}
-.today{display:flex;gap:10px;align-items:flex-start}
-.today .mark{width:18px;height:18px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;font-size:.7rem;font-weight:700;flex:none;margin-top:2px}
-.today b{display:block;font-size:.95rem}
-.today p{margin:2px 0 0;color:var(--muted);font-size:.84rem;max-width:none}
-.next{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:8px 10px;margin-top:8px}
-.next b{font-size:.86rem}
-.next span{font-size:.74rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.dash .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:12px}
-.dash .top b{font-family:var(--display);font-size:1.05rem}
-.dash .top span{font-size:.78rem;color:var(--muted)}
-.verdict{border-left:4px solid var(--act);padding:10px 12px;background:var(--paper);border-radius:0 8px 8px 0;font-size:.92rem;line-height:1.4}
-.verdict .lbl{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-.tile{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;min-width:0}
-.tile .k{font-size:.72rem;color:var(--muted)}
-.tile .v{font-family:var(--display);font-size:1.35rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
-.tile .s{font-size:.72rem;color:var(--muted)}
+.dash .sub{display:flex;justify-content:space-between;gap:10px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 8px}
+.askbar{display:flex;gap:8px;align-items:stretch}
+.askbar .in{flex:1;min-width:0;border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 12px;background:#fff;color:var(--muted);font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.askbar .in .ty{color:var(--ink);font-weight:500}
+.askbar .in .ty:empty+.ph{display:inline}.askbar .in .ph{display:none}
+.askbar .in.rest .ph{display:inline}.askbar .in.rest .ty{display:none}
+#demo.animating .askbar .in.typing .ty::after{content:"";display:inline-block;width:2px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.askbar .go{flex:none;border-radius:var(--r-ctl);background:var(--ink);color:var(--paper);font-weight:700;padding:8px 14px;font-size:.86rem;line-height:1.4}
+.verdict{border-left:4px solid var(--watch);padding:10px 12px;background:var(--paper);border-radius:0 var(--r-ctl) var(--r-ctl) 0}
+.verdict .vl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--watch);font-weight:600}
+.verdict .vl i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--watch);margin-right:6px;vertical-align:1px}
+.verdict .vt{font-weight:600;font-size:.9rem;line-height:1.4;margin-top:3px}
+.verdict .do{margin-top:8px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r-ctl);padding:7px 10px;font-size:.82rem;line-height:1.4}
+.verdict .do b{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.tile{border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 10px;min-width:0}
+.tile .k{font-size:.7rem;color:var(--muted);font-weight:600}
+.tile .v{font-family:var(--display);font-size:1.25rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
+.tile .s{font-size:.68rem;color:var(--muted);line-height:1.3}
 .tile.good .v{color:var(--ok)}
-table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
-td,th{text-align:left;padding:5px 4px;border-bottom:1px solid var(--rule);white-space:nowrap}
-td.r,th.r{text-align:right}
-th{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.chip{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:999px;font-weight:600}
-.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.watch{background:var(--watch-bg);color:var(--watch)}.chip.act{background:var(--act-bg);color:var(--act)}
-.todo{margin-top:10px;font-size:.86rem;border-top:1px solid var(--rule);padding-top:10px}
-.todo b{color:var(--accent);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.dash table{width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}
+.dash td,.dash th{text-align:left;padding:5px 4px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.dash tr:last-child td{border-bottom:0}
+.dash td.r,.dash th.r{text-align:right}
+.dash th{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.chip{display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.watch{background:var(--watch-bg);color:var(--watch)}.chip.act{background:var(--act-bg);color:var(--act)}.chip.early{background:var(--paper);color:var(--muted);border:1px solid var(--rule)}
+.up{color:var(--ok)}.down{color:var(--act)}.flat{color:var(--muted)}.hold{color:var(--watch)}
+/* the two questions, as the app shows them under the ask bar */
+.chat .q{font-size:.78rem;color:var(--muted);margin:10px 0 4px}
+.chat .q b{color:var(--ink);font-weight:600;font-size:.86rem;display:block}
+.chat .a{border-left:2px solid var(--rule);padding:2px 0 2px 12px;margin:0 0 4px 2px;font-size:.84rem;line-height:1.45}
+.chat .a p{margin:0}
+.plan{display:grid;grid-template-columns:auto auto 1fr;gap:3px 12px;margin:0 0 8px;font-size:.8rem}
+.plan b{font-weight:600}.plan .act{font-weight:700}
+#demo.animating [data-step]{opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
+#demo.animating [data-step].show{opacity:1;transform:none}
+.replay{text-align:right;font-size:.76rem;margin-top:4px}
+.replay a{color:var(--muted)}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){[data-step]{opacity:1;transform:none}.askbar .in .ty::after{display:none}}
+
 /* sections */
 section{padding:48px 0;border-top:1px solid var(--rule)}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-.three>div{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:24px 22px}
-.ic{width:44px;height:44px;border-radius:10px;background:#F7E6DE;color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+section>.muted{max-width:56ch;margin:10px 0 0}
+/* how it works: steps beside the mail preview */
+.how{display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:start;margin-top:26px}
+.steps{display:grid;gap:22px}
+.steps>div{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.steps .n{width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:var(--card);display:grid;place-items:center;font:700 .95rem var(--display);font-variant-numeric:tabular-nums}
+.steps p{color:var(--muted);margin:6px 0 0;font-size:1rem}
+.mail{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-card);overflow:hidden}
+.mail .mh{padding:12px 16px;border-bottom:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
+.mail .mh b{color:var(--ink);display:block;font-size:.95rem}
+.mail .mb{padding:14px 16px;font-size:.92rem;line-height:1.5}
+.mail .mb b{display:block;margin-top:8px}
+.mail .mb b:first-child{margin-top:0}
+.mailnote{font-size:.85rem;color:var(--muted);margin:10px 0 0}
+/* the three blocks: 7/5 split plus one borderless strip */
+.blocks{display:grid;grid-template-columns:7fr 5fr;gap:16px;margin-top:26px}
+.blocks>div{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-card);padding:24px 22px;min-width:0}
+.blocks>div.plain{grid-column:1/-1;background:transparent;border:0;padding:12px 0 0;display:grid;grid-template-columns:7fr 5fr;gap:16px;align-items:start}
+.blocks>div.plain>div:first-child{padding:0 22px}
+.blocks>div.plain .crop{margin:0}
+.blocks p{color:var(--muted);margin:8px 0 0;font-size:1rem;max-width:44ch}
+.ic{width:44px;height:44px;border-radius:var(--r-ctl);background:#F7E6DE;color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
 .ic svg{width:22px;height:22px}
-.proofcard{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:32px 28px}
-.proof .num{color:var(--accent)}
-.three p{color:var(--muted);margin:8px 0 0;font-size:1rem;max-width:34ch}
-.three .n{display:none}
-.proof{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px;align-items:end}
-.proof p{color:var(--muted);margin:10px 0 0;max-width:40ch}
-.num{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
-.lab{color:var(--muted);font-size:.95rem;margin-top:4px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:26px}
-.steps p{color:var(--muted);margin:8px 0 0;font-size:1rem}
+.plain .ic{margin-bottom:12px}
+.crop{border:1px solid var(--rule);border-radius:var(--r-ctl);background:var(--paper);padding:10px 12px;margin:-4px 0 16px;font-size:.78rem;font-variant-numeric:tabular-nums}
+.crop .ct,.crop .cr{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.crop .ct{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.crop .cr:last-child{border-bottom:0}
+.crop .cc{font-size:.66rem;padding:1px 7px;border-radius:999px;font-weight:600;white-space:nowrap}
+.crop .cc.ok{background:var(--ok-bg);color:var(--ok)}.crop .cc.watch{background:var(--watch-bg);color:var(--watch)}.crop .cc.act{background:var(--act-bg);color:var(--act)}
+.crop .cv{display:flex;gap:6px;align-items:center;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:600}
+.crop .cv i{width:8px;height:8px;border-radius:50%;background:var(--watch)}
+.crop .cb{font-weight:600;margin:4px 0 8px;color:var(--ink)}
+.crop .cd{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 10px}
+.crop .cd b{display:block;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.crop .cq{font-weight:600;color:var(--ink);margin-bottom:6px}.crop .cq::before{content:"You asked · ";color:var(--muted);font-weight:500}
+.crop .ca{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 10px}
+.crop .cp{margin-top:8px;font-size:.66rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+/* proof: a real chart and a founder note */
+.proof{display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:start;margin-top:26px}
+.chart{margin:0}
+.chart svg{display:block;width:100%;height:auto;font-family:var(--body)}
+.chart .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:8px 0 0}
+.chart .legend i{display:inline-block;width:18px;height:0;border-top:2px solid var(--ink);vertical-align:middle;margin-right:7px}
+.chart .legend .spend i{border-top-color:var(--muted);border-top-style:dashed}
+.chart figcaption{font-size:.85rem;color:var(--muted);margin:10px 0 0;max-width:60ch}
+.chart details{border-top:0;padding:8px 0 0;font-size:.82rem}
+.chart details summary{font:600 .82rem var(--body);color:var(--muted)}
+.chart details table{width:100%;border-collapse:collapse;margin-top:8px;font-variant-numeric:tabular-nums}
+.chart details td,.chart details th{padding:3px 6px;border-bottom:1px solid var(--rule);text-align:right}
+.chart details td:first-child,.chart details th:first-child{text-align:left}
+.chart details th{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.founder{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start;margin-top:4px}
+.founder .photo{width:96px;aspect-ratio:1;border:1px dashed var(--rule);border-radius:var(--r-card);background:var(--card);display:grid;place-items:center;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.founder blockquote{margin:0;font-size:1.02rem;line-height:1.5}
+.founder cite{display:block;font-style:normal;color:var(--muted);font-size:.9rem;margin-top:8px}
+.claim{margin:18px 0 0;font-size:1.02rem;max-width:40ch}
+.claim b{font-weight:600}
+/* pricing teaser */
 .pricing{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
 .pricing .muted{color:var(--muted);max-width:44ch;margin-top:12px}
-.price{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px}
+.price{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-card);padding:26px}
 .amount{font-family:var(--display);font-size:3rem;font-weight:800;letter-spacing:-.03em;line-height:1}
 .amount small{font:500 1rem var(--body);color:var(--muted);letter-spacing:0}
 .price ul{list-style:none;padding:0;margin:18px 0 22px}
@@ -133,61 +198,28 @@ section{padding:48px 0;border-top:1px solid var(--rule)}
 details{border-top:1px solid var(--rule);padding:14px 0}
 summary{cursor:pointer;font-weight:600;font-family:var(--display);font-size:1.05rem}
 details p{color:var(--muted);margin:8px 0 0;max-width:65ch}
+details p.sig{color:var(--muted);font-size:.9rem}
 .final{text-align:left;padding:56px 0}
-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.88rem;padding:24px 0;border-top:1px solid var(--rule)}
-
-/* the demo conversation */
-.q{display:flex;gap:10px;align-items:baseline;padding:4px 0 10px;font-size:.95rem}
-.q .who{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex:none;width:34px}
-.q .qt{font-weight:600}
-#demo.animating .q .qt::after{content:"";display:inline-block;width:2px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
-#demo.animating .q.done .qt::after{display:none}
-.a{border-left:2px solid var(--rule);padding:4px 0 6px 12px;margin:0 0 14px 2px}
-.a .ans{margin:10px 0 0;font-size:.9rem;max-width:none;color:var(--ink)}
-.a table{margin-top:2px}
-#demo.animating [data-step]{opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
-#demo.animating [data-step].show{opacity:1;transform:none}
-.replay{text-align:right;font-size:.78rem}
-.replay a{color:var(--muted)}
-@keyframes blink{50%{opacity:0}}
-@media (prefers-reduced-motion:reduce){[data-step]{opacity:1;transform:none}.q .qt::after{display:none}}
-
-@media (max-width:820px){.hero,.pricing{grid-template-columns:1fr}.three,.steps{grid-template-columns:1fr}.proof{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:repeat(3,1fr)}.navlinks a:not(.btn){display:none}}
-@media (max-width:480px){.tiles{grid-template-columns:1fr 1fr}}
-
-.works{margin-top:18px;font-size:.88rem;color:var(--muted)}
-.works span{display:inline-block;margin-left:10px;padding:2px 10px;border:1px solid var(--rule);border-radius:999px;color:var(--ink);font-weight:600;font-size:.82rem;background:var(--card)}
-footer.big{display:block}
+footer.big{display:block;color:var(--muted);font-size:.88rem;padding:24px 0;border-top:1px solid var(--rule)}
 footer.big .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:18px}
 footer.big .cols b{display:block;color:var(--ink);margin-bottom:8px;font-family:var(--display)}
 footer.big .cols a,footer.big .cols span{display:block;color:var(--muted);text-decoration:none;margin:4px 0;font-size:.92rem}
 footer.big .cols a:hover{color:var(--ink)}
 footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.85rem;color:var(--muted)}
-@media (max-width:820px){footer.big .cols{grid-template-columns:1fr}.works span{margin:6px 6px 0 0}}
 
-.crop{border:1px solid var(--rule);border-radius:10px;background:var(--paper);padding:10px 12px;margin:-4px 0 16px;font-size:.78rem;font-variant-numeric:tabular-nums}
-.crop .ct,.crop .cr{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
-.crop .ct{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.crop .cr:last-child{border-bottom:0}
-.crop .cc{font-size:.66rem;padding:1px 7px;border-radius:999px;font-weight:600}
-.crop .cc.ok{background:var(--ok-bg);color:var(--ok)}.crop .cc.watch{background:var(--watch-bg);color:var(--watch)}
-.crop .cv{display:flex;gap:6px;align-items:center;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.crop .cv i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
-.crop .cb{font-weight:600;margin:4px 0 8px;color:var(--ink)}
-.crop .cd{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:8px 10px}
-.crop .cd b{display:block;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
-.crop .cq{font-weight:600;color:var(--ink);margin-bottom:6px}.crop .cq::before{content:"You · ";color:var(--muted);font-weight:500}
-.crop .ca{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:8px 10px}
-.crop .cp{margin-top:8px;font-size:.66rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
-.mail{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:0;overflow:hidden;max-width:560px}
-.mail .mh{padding:12px 16px;border-bottom:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
-.mail .mh b{color:var(--ink);display:block;font-size:.95rem}
-.mail .mb{padding:14px 16px;font-size:.92rem;line-height:1.5}
-.mail .mb b{display:block;margin-top:8px}
-.demo-link{margin-top:14px}
-.muted{color:var(--muted)}
-#demo table{table-layout:auto}#demo td,#demo th{white-space:normal}
-@media (max-width:820px){.proof{grid-template-columns:1fr 1fr}.proof>div:first-child{grid-column:1/-1}}
+@media (max-width:820px){
+  .hero,.pricing,.how,.blocks,.proof{grid-template-columns:1fr}
+  .blocks>div.plain{grid-template-columns:1fr;gap:12px;padding-top:8px}
+  .navlinks a:not(.btn){display:none}
+  footer.big .cols{grid-template-columns:1fr}
+  .mail{max-width:none}
+}
+@media (max-width:520px){
+  .dash .hp{display:none}
+  .tiles{gap:6px}.tile{padding:7px 8px}.tile .v{font-size:1.1rem}
+  .plan{grid-template-columns:auto 1fr;gap:2px 10px}.plan span:nth-child(3n){grid-column:1/-1;color:var(--muted);margin-bottom:4px}
+  .founder{grid-template-columns:72px 1fr;gap:14px}.founder .photo{width:72px}
+}
 </style>
 </head>
 <body>
@@ -205,95 +237,152 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
     <div class="cta"><a class="btn primary" href="/start">Start free 7 days</a><a class="btn quiet" href="#how">See how it works</a></div>
     <small>From €39/month after the trial · read-only access · cancel anytime</small>
     <p class="demo-link"><a href="/demo/">See a demo dashboard →</a> <span class="muted">(fictional shop, nothing to enter)</span></p>
-    <div class="works">Works with <span>Wix</span><span>Shopify</span><span>WooCommerce</span><span>Stripe</span><span>Mollie</span><span>your own site</span></div>
+    <div class="works">Works with
+      <div class="marks"><span class="wm">Wix</span><span class="wm">Shopify</span><span class="wm">WooCommerce</span><span class="wm">Stripe</span><span class="wm">Mollie</span><span class="own">and your own site</span></div>
+    </div>
   </div>
-  <div class="dash" aria-label="Example of asking Kalmly about today's ads" id="demo">
+
+  <div class="dash" aria-label="Example of Kalmly's Today page for a fictional shop" id="demo">
     <div class="bar"><b>Fika Ceramics</b><span><span id="demo-date">Today</span> · example</span></div>
     <div class="sec">
-      <div class="q" data-step="1"><span class="who">You</span><span class="qt" data-text="What's the status of my ads today?">What's the status of my ads today?</span></div>
-      <div class="a" data-step="2">
-        <div class="lbl">7 days to yesterday · judged on shop revenue</div>
-        <div class="stats">
-          <div><div class="v">€847.32</div><div class="k">Ad spend</div><div class="d up">+4.1%</div></div>
-          <div><div class="v">€4,612.80</div><div class="k">Revenue (shop)</div><div class="d up">+9.7%</div></div>
-          <div><div class="v">5.44×</div><div class="k">Return</div><div class="d flat">target 3.0×</div></div>
-          <div><div class="v">€16.61</div><div class="k">Per purchase</div><div class="d flat">51 purchases</div></div>
-        </div>
-        <p class="ans">Healthy. Spend is up 4% and revenue up 10% on last week, so scaling is working. One ad set is tiring: Vases, seen 2.7 times per person and its click rate is down 31%.</p>
+      <div class="askbar"><div class="in rest" id="ask-in"><span class="ty"></span><span class="ph">Ask anything about your ads, e.g. what should I scale?</span></div><span class="go">Ask</span></div>
+    </div>
+    <div class="sec">
+      <div class="sub"><span>Today's check</span><span>7 days to yesterday</span></div>
+      <div class="verdict">
+        <div class="vl"><i></i>Verdict · keep an eye on it</div>
+        <div class="vt">4.7× overall, above your 3× target. Gift sets lost money this week (€97 in, €87 back) and Vases is tiring.</div>
+        <div class="do"><b>Do today</b>Pause Gift sets. Nothing else in Ads Manager.</div>
       </div>
-      <div class="q" data-step="3"><span class="who">You</span><span class="qt" data-text="What should I scale, and what should I change?">What should I scale, and what should I change?</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="k">Ad spend</div><div class="v">€832.20</div><div class="s">+4.1% vs week before</div></div>
+        <div class="tile"><div class="k">Real sales</div><div class="v">€3,899.30</div><div class="s">50 orders · +9.7%</div></div>
+        <div class="tile good"><div class="k">Real return</div><div class="v">4.7×</div><div class="s">sales ÷ ad spend · target 3×</div></div>
+      </div>
+      <table>
+        <tr><th>Product line</th><th class="r">Spend</th><th class="r hp">Sales</th><th class="r">Return</th><th>Numbers say</th></tr>
+        <tr><td><b>Mugs</b></td><td class="r">€318.40</td><td class="r hp">€2,046.50</td><td class="r"><b>6.4×</b></td><td><span class="chip ok">▲ above target</span></td></tr>
+        <tr><td><b>Workshops</b></td><td class="r">€207.15</td><td class="r hp">€1,201.00</td><td class="r"><b>5.8×</b></td><td><span class="chip ok">▲ above target</span></td></tr>
+        <tr><td><b>Vases</b></td><td class="r">€168.60</td><td class="r hp">€451.30</td><td class="r"><b>2.7×</b></td><td><span class="chip watch">■ near target</span></td></tr>
+        <tr><td><b>Gift sets</b></td><td class="r">€96.80</td><td class="r hp">€87.00</td><td class="r"><b>0.9×</b></td><td><span class="chip act">▼ below target</span></td></tr>
+        <tr><td><b>Candles</b> <span class="flat">new</span></td><td class="r">€41.25</td><td class="r hp">€113.50</td><td class="r flat">3 orders</td><td><span class="chip early">… too few to judge</span></td></tr>
+      </table>
+    </div>
+    <div class="sec chat">
+      <div class="q" data-step="1"><b>You asked</b><span class="qt" data-text="What's the status of my ads today?">What's the status of my ads today?</span></div>
+      <div class="a" data-step="2"><p>Four of five lines pay back above your 3× target and the account returned 4.7× on €832. Gift sets is the exception at 0.9×. Candles is too new to judge: 3 orders. Nothing is saturated, 1.7 views per person.</p></div>
+      <div class="q" data-step="3"><b>You asked</b><span class="qt" data-text="What should I scale, and what should I change?">What should I scale, and what should I change?</span></div>
       <div class="a" data-step="4">
-        <table>
-          <tr><th>Ad set</th><th class="r">Spend</th><th class="r">Return</th><th>Do</th></tr>
-          <tr><td>Mugs – prospecting</td><td class="r">€312.40</td><td class="r">6.37×</td><td class="up"><b>Scale</b> €45 → €54/day</td></tr>
-          <tr><td>Retargeting – 30d</td><td class="r">€103.85</td><td class="r">6.42×</td><td class="up"><b>Scale</b> €15 → €18/day</td></tr>
-          <tr><td>Workshops</td><td class="r">€241.17</td><td class="r">6.09×</td><td class="flat"><b>Hold</b> raised Friday, still learning</td></tr>
-          <tr><td>Vases</td><td class="r">€189.90</td><td class="r">2.57×</td><td class="down"><b>Change</b> new creative, not more budget</td></tr>
-        </table>
-        <p class="ans">Make one change today: raise Mugs to €54. Retargeting can follow on Thursday, three days apart keeps Meta's learning intact. Vases needs a second video before it gets another euro.</p>
+        <div class="plan">
+          <b>Mugs</b><span class="act up">Scale</span><span>€45 → €54 a day, Thursday</span>
+          <b>Workshops</b><span class="act hold">Hold</span><span>raised Friday, still learning</span>
+          <b>Vases</b><span class="act hold">Change</span><span>new video, not more budget</span>
+          <b>Gift sets</b><span class="act down">Pause</span><span>€97 in, €87 back</span>
+          <b>Candles</b><span class="act flat">Wait</span><span>3 orders; judge on Monday</span>
+        </div>
+        <p>One edit today: pause Gift sets. Mugs goes up on Thursday; three days between changes keeps Meta's learning intact.</p>
       </div>
       <div class="replay" data-step="5"><a href="#demo" id="replay">Replay</a></div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>What arrives every morning</h2>
-  <p class="muted" style="max-width:52ch;margin:8px 0 18px">In your dashboard, and, if you want, by email or Telegram. This is a real check, numbers changed.</p>
-  <div class="mail">
-    <div class="mh"><b>Fika Ceramics — ad check, Tue 6 Oct</b>from Kalmly · 08:02</div>
-    <div class="mb">
-      <b>Verdict:</b> healthy, hands off. One ad set to watch: Vases is tiring (seen 2.7 times per person, click rate down 31%).
-      <b>Money:</b> €847 spent over 7 days, €4,613 in real shop sales: 5.4× return, above your 3× target.
-      <b>Per product line:</b> Mugs 6.4× — scale next · Workshops 6.1× — hold, raised Friday · Vases 2.6× — change the creative · Retargeting 6.4× — hold.
-      <b>Do today:</b> nothing in Ads Manager. Brief a second Vases video.
-      <b>Next up:</b> Thursday, if Mugs holds above 3×: raise it from €45 to €54 a day.
+<section id="how">
+  <h2>How it works</h2>
+  <p class="muted">Ten minutes to set up. The first check arrives the next morning, in your dashboard and, if you want, by email or Telegram.</p>
+  <div class="how">
+    <div class="steps">
+      <div><div class="n">1</div><div><h3>Start the trial</h3><p>Card on file, nothing charged for 7 days. Your dashboard is ready the moment you sign up.</p></div></div>
+      <div><div class="n">2</div><div><h3>Connect ads and shop, read-only</h3><p>Connect with Facebook in one click (we ask for "read ads" only; remove us any time in your Facebook settings), then your shop: Wix, Shopify, WooCommerce, Stripe, Mollie or your own site. Kalmly can read; it cannot touch a budget or an ad.</p></div></div>
+      <div><div class="n">3</div><div><h3>One decision every morning</h3><p>Describe what you sell in two lines. From the next morning: a verdict, the reason, and at most one action with exact amounts, per product line or city. Most days: "leave it".</p></div></div>
+    </div>
+    <div>
+      <div class="mail">
+        <div class="mh"><b>Fika Ceramics — ad check, Tue 6 Oct</b>from Kalmly · 08:02</div>
+        <div class="mb">
+          <b>Verdict:</b> keep an eye on it. Gift sets lost money this week (0.9×). Vases is tiring (seen 2.7 times per person, click rate down 31%).
+          <b>Money:</b> €832 spent over 7 days, €3,899 in real shop sales: 4.7× return, above your 3× target.
+          <b>Per product line:</b> Mugs 6.4× — scale Thursday · Workshops 5.8× — hold, raised Friday · Vases 2.7× — change the creative · Gift sets 0.9× — pause · Candles — 3 orders, too few to judge.
+          <b>Do today:</b> pause Gift sets. Nothing else in Ads Manager. Brief a second Vases video.
+          <b>Next up:</b> Thursday, if Mugs holds above 3×: raise it from €45 to €54 a day.
+        </div>
+      </div>
+      <p class="mailnote">What the email looks like. A real check, numbers changed.</p>
     </div>
   </div>
 </section>
 
-<section id="how">
-  <h2>How it works</h2>
-  <div class="steps">
-    <div><h3>1 · Connect, read-only</h3><p>Your Meta ad account with view rights, and your shop. Kalmly can read; it cannot touch a budget or an ad.</p></div>
-    <div><h3>2 · Judged on real sales</h3><p>Every ad set is measured on shop revenue ÷ ad spend, per city or product, not on Meta's own estimates.</p></div>
-    <div><h3>3 · One decision a day</h3><p>Every morning: a verdict, the reason, and at most one action with exact amounts. Most days: "leave it".</p></div>
-  </div>
-</section>
-
 <section>
-  <h2>Know which ads make money. Know what to change.</h2>
-  <div class="three">
-    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div class="crop"><div class="ct"><span>Product line</span><span>Return</span><span></span></div><div class="cr"><span>Mugs</span><span>6.4×</span><span class="cc ok">▲ above target</span></div><div class="cr"><span>Workshops</span><span>6.1×</span><span class="cc ok">▲ above target</span></div><div class="cr"><span>Vases</span><span>2.6×</span><span class="cc watch">■ near target</span></div></div><div class="n">Connected to sales</div><h3>Judged on revenue, not clicks</h3><p>Every ad set is measured on real shop revenue divided by ad spend, per product line, city or service. Meta's own purchase count is shown, and labelled as the estimate it is.</p></div>
-    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><div class="crop"><div class="cv"><i></i><span>Verdict · healthy</span></div><div class="cb">Hands off. Vases is tiring (seen 2.7× per person).</div><div class="cd"><b>Do today</b>Nothing in Ads Manager. Brief a second Vases video.</div></div><div class="n">One decision a day</div><h3>Act, or leave it alone</h3><p>Each morning: a verdict, the reason, and at most one action. Most days the right action is none, and Kalmly says so, with the numbers that justify it.</p></div>
-    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div class="crop"><div class="cq">What should I scale?</div><div class="ca">Raise <b>Mugs</b> from €45 to €54 a day. Hold Workshops. Vases: new creative, not budget.</div><div class="cp">Read-only · you make the change</div></div><div class="n">Read-only</div><h3>Nothing changes without you</h3><p>Kalmly reads your account; it never edits a budget or an ad. You make the change in Ads Manager when it is actually needed.</p></div>
+  <h2>What Kalmly does, and what it leaves to you</h2>
+  <div class="blocks">
+    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div class="crop"><div class="ct"><span>Product line</span><span>Return</span><span></span></div><div class="cr"><span>Mugs</span><span>6.4×</span><span class="cc ok">▲ above target</span></div><div class="cr"><span>Vases</span><span>2.7×</span><span class="cc watch">■ near target</span></div><div class="cr"><span>Gift sets</span><span>0.9×</span><span class="cc act">▼ below target</span></div></div><h3>Judged on revenue, not clicks</h3><p>Every ad set is measured on real shop revenue divided by ad spend, per product line, city or service. Meta's own purchase count is shown too, and labelled as the estimate it is.</p></div>
+    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><div class="crop"><div class="cv"><i></i><span>Verdict · keep an eye on it</span></div><div class="cb">Gift sets lost money this week. Vases is tiring (seen 2.7× per person).</div><div class="cd"><b>Do today</b>Pause Gift sets. Nothing else in Ads Manager.</div></div><h3>Act, or leave it alone</h3><p>Each morning: a verdict, the reason, and at most one action. Most days the right action is none, and Kalmly says so, with the numbers that justify it.</p></div>
+    <div class="plain"><div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Nothing changes without you</h3><p>Kalmly reads your account; it never edits a budget or an ad. You make the change in Ads Manager when it is actually needed, and you can remove the access in one click.</p></div><div class="crop"><div class="cq">What should I scale?</div><div class="ca">Raise <b>Mugs</b> from €45 to €54 a day on Thursday. Hold Workshops. Vases: new video, not budget. Pause Gift sets today.</div><div class="cp">Read-only · you make the change</div></div></div>
   </div>
 </section>
 
-<section>
-  <div class="proof proofcard">
-    <div><h2>Built on our own ad budget first</h2><p>The same daily check ran the founder's Meta ads across five cities, May to September 2026. Real shop revenue from all channels, divided by ad spend.</p></div>
-    <div><div class="num">8×</div><div class="lab">weekly sales</div></div>
-    <div><div class="num">2.4×</div><div class="lab">weekly ad spend</div></div>
-    <div><div class="num">4–6×</div><div class="lab">return, the whole way up</div></div>
-  </div>
-</section>
-
-<section id="setup">
-  <h2>Set up in ten minutes</h2>
-  <div class="steps">
-    <div><h3>Start the trial</h3><p>Card on file, nothing charged for 7 days. Your dashboard is ready the moment you sign up.</p></div>
-    <div><h3>Connect ads and shop, read-only</h3><p>Connect with Facebook in one click (we ask for "read ads" only; remove us any time in your Facebook settings), then your shop: Wix, Shopify, WooCommerce, Stripe, Mollie or your own site.</p></div>
-    <div><h3>First check tomorrow morning</h3><p>Describe what you sell in two lines. From the next morning your dashboard has the day's decision. Optional: the same check by email.</p></div>
-  </div>
-</section>
-
-<section>
-  <h2>Compared with the alternatives</h2>
-  <div class="three">
-    <div><h3>An agency or freelancer</h3><p>€500 to €1,500 a month for a weekly look at your account. Kalmly looks every day, for the price of one coffee a week.</p></div>
-    <div><h3>Doing it yourself in Ads Manager</h3><p>Free, and the most expensive option: every reactive edit resets Meta's learning. Kalmly is the calm second opinion that says "leave it".</p></div>
-    <div><h3>Ads analytics tools</h3><p>They show you more numbers. Kalmly gives you the decision, in one sentence, connected to what actually sold.</p></div>
+<section id="proof">
+  <h2>Built on the founder's own ads first</h2>
+  <p class="muted">Kalmly grew out of the daily check Maroussia ran on her own business, WOGO Cocktail Walk, a cocktail-walk experience in five Dutch cities. Below: 22 weeks of its Meta ad spend against the shop's revenue, 4 May to 28 September 2026.</p>
+  <div class="proof">
+    <figure class="chart">
+      <svg viewBox="0 0 640 240" role="img" aria-labelledby="chart-t chart-d">
+        <title id="chart-t">Weekly Meta ad spend and shop revenue, WOGO Cocktail Walk, May to September 2026</title>
+        <desc id="chart-d">Ad spend rises from about 100 euro a week to about 900. Revenue rises from about 900 euro a week to between 3,500 and 5,400 euro. The full numbers are in the table below the chart.</desc>
+        <g stroke="#E4DED5" stroke-width="1">
+          <line x1="44" y1="210" x2="624" y2="210"/><line x1="44" y1="146" x2="624" y2="146"/><line x1="44" y1="82" x2="624" y2="82"/><line x1="44" y1="18" x2="624" y2="18"/>
+        </g>
+        <g fill="#625B53" font-size="13" text-anchor="end">
+          <text x="38" y="214">€0</text><text x="38" y="150">€2k</text><text x="38" y="86">€4k</text><text x="38" y="22">€6k</text>
+        </g>
+        <g fill="#625B53" font-size="13">
+          <text x="44" y="232">May</text><text x="154.5" y="232">Jun</text><text x="292.6" y="232">Jul</text><text x="403" y="232">Aug</text><text x="541.1" y="232">Sep</text>
+        </g>
+        <polyline fill="none" stroke="#625B53" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round" points="44.0,206.8 71.6,202.2 99.2,201.0 126.9,201.0 154.5,197.4 182.1,195.5 209.7,198.9 237.3,200.5 265.0,199.5 292.6,196.7 320.2,194.2 347.8,195.0 375.4,189.8 403.0,186.4 430.7,186.7 458.3,185.7 485.9,188.4 513.5,182.2 541.1,178.4 568.8,180.0 596.4,185.3 624.0,182.7"/>
+        <polyline fill="none" stroke="#1B1917" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="44.0,180.7 71.6,180.1 99.2,149.0 126.9,148.8 154.5,155.7 182.1,168.0 209.7,158.1 237.3,167.5 265.0,134.2 292.6,127.0 320.2,155.2 347.8,109.5 375.4,144.7 403.0,95.0 430.7,110.3 458.3,134.9 485.9,97.3 513.5,86.1 541.1,35.7 568.8,102.7 596.4,62.0 624.0,94.0"/>
+        <circle cx="541.1" cy="35.7" r="4.5" fill="#1B1917" stroke="#F6F3EE" stroke-width="2"/>
+        <line x1="533" y1="35.7" x2="420" y2="35.7" stroke="#625B53" stroke-width="1"/>
+        <text x="414" y="31" fill="#1B1917" font-size="13" font-weight="600" text-anchor="end">Week of 7 Sep</text>
+        <text x="414" y="45" fill="#625B53" font-size="13" text-anchor="end">€987 ad spend, €5,448 revenue, 5.5×</text>
+      </svg>
+      <div class="legend"><span class="rev"><i></i>Shop revenue, all channels</span><span class="spend"><i></i>Meta ad spend</span></div>
+      <figcaption>Per week, in euro. Revenue is the whole shop, not only what Meta attributes to itself; that is the number the ads are judged on.</figcaption>
+      <details><summary>The 22 weeks as a table</summary>
+        <table>
+          <tr><th>Week of</th><th>Ad spend</th><th>Revenue</th><th>Orders</th><th>Return</th></tr>
+          <tr><td>4 May</td><td>€100</td><td>€914</td><td>15</td><td>9.1×</td></tr>
+          <tr><td>11 May</td><td>€243</td><td>€934</td><td>10</td><td>3.8×</td></tr>
+          <tr><td>18 May</td><td>€283</td><td>€1,906</td><td>24</td><td>6.7×</td></tr>
+          <tr><td>25 May</td><td>€281</td><td>€1,914</td><td>21</td><td>6.8×</td></tr>
+          <tr><td>1 Jun</td><td>€393</td><td>€1,697</td><td>21</td><td>4.3×</td></tr>
+          <tr><td>8 Jun</td><td>€452</td><td>€1,313</td><td>18</td><td>2.9×</td></tr>
+          <tr><td>15 Jun</td><td>€347</td><td>€1,620</td><td>23</td><td>4.7×</td></tr>
+          <tr><td>22 Jun</td><td>€296</td><td>€1,327</td><td>22</td><td>4.5×</td></tr>
+          <tr><td>29 Jun</td><td>€328</td><td>€2,368</td><td>31</td><td>7.2×</td></tr>
+          <tr><td>6 Jul</td><td>€417</td><td>€2,594</td><td>30</td><td>6.2×</td></tr>
+          <tr><td>13 Jul</td><td>€494</td><td>€1,714</td><td>26</td><td>3.5×</td></tr>
+          <tr><td>20 Jul</td><td>€470</td><td>€3,140</td><td>42</td><td>6.7×</td></tr>
+          <tr><td>27 Jul</td><td>€630</td><td>€2,040</td><td>30</td><td>3.2×</td></tr>
+          <tr><td>3 Aug</td><td>€739</td><td>€3,595</td><td>41</td><td>4.9×</td></tr>
+          <tr><td>10 Aug</td><td>€727</td><td>€3,115</td><td>49</td><td>4.3×</td></tr>
+          <tr><td>17 Aug</td><td>€759</td><td>€2,346</td><td>39</td><td>3.1×</td></tr>
+          <tr><td>24 Aug</td><td>€676</td><td>€3,521</td><td>46</td><td>5.2×</td></tr>
+          <tr><td>31 Aug</td><td>€869</td><td>€3,873</td><td>48</td><td>4.5×</td></tr>
+          <tr><td>7 Sep</td><td>€987</td><td>€5,448</td><td>61</td><td>5.5×</td></tr>
+          <tr><td>14 Sep</td><td>€938</td><td>€3,352</td><td>48</td><td>3.6×</td></tr>
+          <tr><td>21 Sep</td><td>€771</td><td>€4,624</td><td>66</td><td>6.0×</td></tr>
+          <tr><td>28 Sep</td><td>€852</td><td>€3,624</td><td>49</td><td>4.3×</td></tr>
+        </table>
+      </details>
+    </figure>
+    <div>
+      <p class="claim">Weekly ad spend went from about <b>€100 to about €900</b>. Weekly shop revenue went from about <b>€900 to between €3,500 and €5,400</b>. The return, revenue divided by spend, never dropped below 2.9× in those 22 weeks and averaged 4.7×.</p>
+      <p class="muted" style="margin-top:10px;font-size:.92rem;max-width:40ch">A summer season helped; so did the check saying "leave it" on most mornings instead of resetting Meta's learning with a daily edit.</p>
+      <div class="founder" style="margin-top:22px">
+        <div class="photo" aria-label="Photo of the founder, to be added">photo</div>
+        <blockquote>I built Kalmly because I was spending an hour a day in Ads Manager and still guessing. Now I read one sentence at eight in the morning and get on with running the walks.<cite>Maroussia, founder</cite></blockquote>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -312,20 +401,22 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
         <li>Cancel anytime, no contract</li>
       </ul>
       <a class="btn primary" href="/start?plan=solo">Start free 7 days</a>
-      <p class="alt"><a href="/pricing/">See all plans and what's included →</a></p>
+      <p class="alt"><a href="/pricing/">See all plans and what differs →</a></p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Quick answers</h2>
+  <h2>Honest answers</h2>
   <div style="margin-top:14px">
   <details><summary>Do I give you my Facebook login?</summary><p>No. You connect with view rights only. No password, no edit rights, removable in one click.</p></details>
-  <details><summary>Does it change my ads for me?</summary><p>No. Kalmly tells you the exact edit and the reason; you make it in Ads Manager. Approve-to-apply is on the roadmap.</p></details>
+  <details><summary>Does it change my ads for me?</summary><p>No. Kalmly tells you the exact edit and the reason; you make it in Ads Manager.</p></details>
+  <details><summary>Why read-only, forever?</summary><p>The moment software can edit a budget, a wrong guess costs real money and you cannot see why it happened. Kalmly makes the case with the numbers, in one sentence, and you make the change. If it is ever wrong, you will know before it costs you anything. That is a promise, not a roadmap item.</p></details>
+  <details><summary>Why Meta only?</summary><p>Because a shallow tool for five platforms helps nobody. Meta is where most small businesses spend, and judging those ads on real sales properly, with learning phases, frequency and per-city budgets, takes all of our attention. If Google or TikTok ever get the same depth, you will read it here first.</p></details>
+  <details><summary>Why one decision instead of a dashboard of charts?</summary><p>Ads Manager already is a dashboard of charts, and it was that dashboard that had me making a nervous edit every morning. What I needed at eight o'clock was one sentence: change this, or leave it. The numbers are still there if you want them; the sentence comes first.</p><p class="sig">— Maroussia, founder</p></details>
   <details><summary>Who is it for?</summary><p>Businesses that run their own Meta ads at €10 to €200 a day and want more sales from them: tours, venues, shops, studios, e-commerce. Also for anyone paying an agency and wondering what they get for it.</p></details>
   <details><summary>What happens after the 7 days?</summary><p>Your card is charged for the plan you picked. We email you on day 6; cancel before day 7 from your page and nothing is charged.</p></details>
   <details><summary>Do I need a shop connection?</summary><p>No. Without one, Kalmly judges on Meta's own numbers and says so. With one, every verdict is based on real sales, which is what makes it reliable.</p></details>
-  <details><summary>Google Ads or TikTok?</summary><p>Meta only, for now. Tell us if you want more; it shapes what we build next.</p></details>
   </div>
 </section>
 
@@ -336,8 +427,8 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
 
 <footer class="big">
   <div class="cols">
-    <div><b>Product</b><a href="/#how">How it works</a><a href="/pricing/">Pricing</a><a href="/login">Log in</a><a href="/start">Start free</a></div>
-    <div><b>Company</b><span>Kalmly, Amsterdam</span><a href="mailto:hello@kalmly.io">hello@kalmly.io</a><a href="https://www.linkedin.com/company/kalmly" rel="noopener noreferrer">LinkedIn</a></div>
+    <div><b>Product</b><a href="/#how">How it works</a><a href="/pricing/">Pricing</a><a href="/demo/">Demo dashboard</a><a href="/login">Log in</a><a href="/start">Start free</a></div>
+    <div><b>Company</b><span>Built in Amsterdam · founded 2026</span><a href="mailto:hello@kalmly.io">hello@kalmly.io</a><a href="https://www.linkedin.com/company/kalmly" rel="noopener noreferrer">LinkedIn</a></div>
     <div><b>Legal</b><a href="/privacy">Privacy policy</a><a href="/terms">Terms of service</a><span>[legal entity] · KvK [number]</span></div>
   </div>
   <div class="bottom">© 2026 Kalmly · Meta tells you what happened. Kalmly tells you what to do.</div>
@@ -346,31 +437,34 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
 
 <script>
 (function(){
+  // The Today-page replica is complete without this script. With it, the two questions are typed into the ask bar
+  // and their answers appear underneath, like the real page; the end state equals the no-script state.
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var demo = document.getElementById("demo"), askIn = document.getElementById("ask-in"), ty = askIn.querySelector(".ty");
   var steps = Array.prototype.slice.call(document.querySelectorAll("#demo [data-step]"));
   var timers = [];
-  function typeInto(q, done){
-    var el = q.querySelector(".qt"), text = el.getAttribute("data-text"), k = 0;
-    el.textContent = "";
-    function tick(){ el.textContent = text.slice(0, ++k); if (k < text.length) timers.push(setTimeout(tick, 28)); else { q.classList.add("done"); done(); } }
-    tick();
+  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+  function typeText(text, done){
+    askIn.classList.remove("rest"); askIn.classList.add("typing"); ty.textContent = "";
+    var k = 0;
+    (function tick(){ ty.textContent = text.slice(0, ++k); if (k < text.length) later(tick, 28); else later(done, 450); })();
   }
-  var demo = document.getElementById("demo");
+  function submit(){ askIn.classList.remove("typing"); askIn.classList.add("rest"); ty.textContent = ""; }
   function run(){
     timers.forEach(clearTimeout); timers = [];
     if (reduce) { demo.classList.remove("animating"); return; }
     demo.classList.add("animating");
-    steps.forEach(function(s){ s.classList.remove("show"); s.classList.remove("done"); });
+    steps.forEach(function(s){ s.classList.remove("show"); });
     var i = 0;
     function next(delay){
-      timers.push(setTimeout(function(){
+      later(function(){
         var s = steps[i++]; if (!s) return;
-        s.classList.add("show");
-        if (s.classList.contains("q")) typeInto(s, function(){ next(500); });
-        else next(s.classList.contains("replay") ? 0 : 2600);
-      }, delay));
+        if (s.classList.contains("q")) {
+          typeText(s.querySelector(".qt").getAttribute("data-text"), function(){ submit(); s.classList.add("show"); next(250); });
+        } else { s.classList.add("show"); next(s.classList.contains("replay") ? 0 : 2800); }
+      }, delay);
     }
-    next(600);
+    next(700);
   }
   try { document.getElementById("demo-date").textContent = new Date().toLocaleDateString("en-GB", {weekday:"long", day:"numeric", month:"short"}); } catch (e) {}
   document.getElementById("replay").addEventListener("click", function(e){ e.preventDefault(); run(); });
