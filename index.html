@@ -77,13 +77,30 @@ h3{font-size:1.15rem;font-weight:700;line-height:1.3}
 .works .wm{font:700 1.05rem/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.02em;color:var(--ink);opacity:.6}
 .works .own{font-size:.82rem;color:var(--muted)}
 
-/* the hero visual: a replica of the app's Today page */
+/* the hero visual: a replica of the app's Today page (editorial: paper, hairlines, one orange marker) */
 .dash{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-card);box-shadow:0 1px 2px rgba(27,25,23,.05);min-width:0;font-size:.84rem;overflow:hidden}
 .dash .bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--rule);font-size:.78rem;color:var(--muted)}
 .dash .bar b{font:700 .95rem var(--display);color:var(--ink);letter-spacing:-.02em}
-.dash .sec{padding:12px 14px;border-bottom:1px solid var(--rule)}
+.dash .sec{padding:14px 16px;border-bottom:1px solid var(--rule)}
 .dash .sec:last-child{border-bottom:0}
-.dash .sub{display:flex;justify-content:space-between;gap:10px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 8px}
+.dash .greet{font:700 1.3rem/1.1 var(--display);letter-spacing:-.025em;margin:0 0 6px}
+.dash .st{font:600 .95rem/1.35 var(--display);letter-spacing:-.01em;margin:0 0 14px}
+.dash .act{border-left:3px solid var(--accent);padding:2px 0 2px 12px;margin:0 0 16px}
+.dash .al{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px}
+.dash .at{font:700 1.45rem/1.1 var(--display);letter-spacing:-.025em;margin:0 0 6px}
+.dash .ev{font-weight:600;font-size:.84rem;font-variant-numeric:tabular-nums;margin:0 0 3px}
+.dash .rs{color:var(--muted);font-size:.8rem;line-height:1.4}
+.dash .go{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.dash .pbtn{background:var(--accent);color:var(--accent-ink);border-radius:var(--r-ctl);font-weight:700;padding:7px 12px;font-size:.8rem}
+.dash .did{color:var(--muted);font-size:.78rem;text-decoration:underline}
+.dash .ek{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 2px}
+.dash .rows{border-top:1px solid var(--rule);margin-bottom:12px}
+.dash .row{display:grid;grid-template-columns:1.1fr 44px 1fr 1.3fr;gap:4px 10px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--rule);font-size:.8rem}
+.dash .row .n{font-weight:700}.dash .row .r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}.dash .row .l{font-weight:600}.dash .row .w{color:var(--muted);font-size:.74rem}
+.dash .acct{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 0 0}
+.dash .acct small{display:block;font-size:.66rem;color:var(--muted)}
+.dash .acct b{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dash .asklabel{font-size:.78rem;font-weight:600;margin:0 0 6px}
 .askbar{display:flex;gap:8px;align-items:stretch}
 .askbar .in{flex:1;min-width:0;border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 12px;background:#fff;color:var(--muted);font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
 .askbar .in .ty{color:var(--ink);font-weight:500}
@@ -91,33 +108,14 @@ h3{font-size:1.15rem;font-weight:700;line-height:1.3}
 .askbar .in.rest .ph{display:inline}.askbar .in.rest .ty{display:none}
 #demo.animating .askbar .in.typing .ty::after{content:"";display:inline-block;width:2px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
 .askbar .go{flex:none;border-radius:var(--r-ctl);background:var(--ink);color:var(--paper);font-weight:700;padding:8px 14px;font-size:.86rem;line-height:1.4}
-.verdict{border-left:4px solid var(--watch);padding:10px 12px;background:var(--paper);border-radius:0 var(--r-ctl) var(--r-ctl) 0}
-.verdict .vl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--watch);font-weight:600}
-.verdict .vl i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--watch);margin-right:6px;vertical-align:1px}
-.verdict .vt{font-weight:600;font-size:.9rem;line-height:1.4;margin-top:3px}
-.verdict .do{margin-top:8px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r-ctl);padding:7px 10px;font-size:.82rem;line-height:1.4}
-.verdict .do b{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
-.tile{border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 10px;min-width:0}
-.tile .k{font-size:.7rem;color:var(--muted);font-weight:600}
-.tile .v{font-family:var(--display);font-size:1.25rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
-.tile .s{font-size:.68rem;color:var(--muted);line-height:1.3}
-.tile.good .v{color:var(--ok)}
-.dash table{width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}
-.dash td,.dash th{text-align:left;padding:5px 4px;border-bottom:1px solid var(--rule);white-space:nowrap}
-.dash tr:last-child td{border-bottom:0}
-.dash td.r,.dash th.r{text-align:right}
-.dash th{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.chip{display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
-.chip.ok{background:var(--ok-bg);color:var(--ok)}.chip.watch{background:var(--watch-bg);color:var(--watch)}.chip.act{background:var(--act-bg);color:var(--act)}.chip.early{background:var(--paper);color:var(--muted);border:1px solid var(--rule)}
-.up{color:var(--ok)}.down{color:var(--act)}.flat{color:var(--muted)}.hold{color:var(--watch)}
 /* the two questions, as the app shows them under the ask bar */
-.chat .q{font-size:.78rem;color:var(--muted);margin:10px 0 4px}
-.chat .q b{color:var(--ink);font-weight:600;font-size:.86rem;display:block}
+.chat .q{font-size:.86rem;font-weight:600;margin:12px 0 4px}
+.chat .q b{display:none}
 .chat .a{border-left:2px solid var(--rule);padding:2px 0 2px 12px;margin:0 0 4px 2px;font-size:.84rem;line-height:1.45}
+.chat .a .ah{font-size:.68rem;color:var(--muted);margin-bottom:3px}
 .chat .a p{margin:0}
 .plan{display:grid;grid-template-columns:auto auto 1fr;gap:3px 12px;margin:0 0 8px;font-size:.8rem}
-.plan b{font-weight:600}.plan .act{font-weight:700}
+.plan b{font-weight:600}.plan .act2{font-weight:700}
 #demo.animating [data-step]{opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
 #demo.animating [data-step].show{opacity:1;transform:none}
 .replay{text-align:right;font-size:.76rem;margin-top:4px}
@@ -155,13 +153,11 @@ section>.muted{max-width:56ch;margin:10px 0 0}
 .crop .ct,.crop .cr{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
 .crop .ct{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .crop .cr:last-child{border-bottom:0}
-.crop .cc{font-size:.66rem;padding:1px 7px;border-radius:999px;font-weight:600;white-space:nowrap}
-.crop .cc.ok{background:var(--ok-bg);color:var(--ok)}.crop .cc.watch{background:var(--watch-bg);color:var(--watch)}.crop .cc.act{background:var(--act-bg);color:var(--act)}
-.crop .cv{display:flex;gap:6px;align-items:center;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:600}
-.crop .cv i{width:8px;height:8px;border-radius:50%;background:var(--watch)}
-.crop .cb{font-weight:600;margin:4px 0 8px;color:var(--ink)}
-.crop .cd{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 10px}
-.crop .cd b{display:block;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.crop .cc{font-size:.72rem;font-weight:600;white-space:nowrap;color:var(--ink)}
+.crop .cv{font:600 .92rem/1.3 var(--display);color:var(--ink);margin:0 0 10px}
+.crop .cd{border-left:3px solid var(--accent);padding:2px 0 2px 10px;font:700 1rem/1.2 var(--display);letter-spacing:-.02em}
+.crop .cd b{display:block;font:600 .62rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.crop .cd small{display:block;font:600 .72rem var(--body);color:var(--ink);margin-top:4px;letter-spacing:0}
 .crop .cq{font-weight:600;color:var(--ink);margin-bottom:6px}.crop .cq::before{content:"You asked · ";color:var(--muted);font-weight:500}
 .crop .ca{background:var(--card);border:1px solid var(--rule);border-radius:var(--r-ctl);padding:8px 10px}
 .crop .cp{margin-top:8px;font-size:.66rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
@@ -215,7 +211,8 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
   .mail{max-width:none}
 }
 @media (max-width:520px){
-  .dash .hp{display:none}
+  .dash .row{grid-template-columns:1fr auto;gap:1px 8px}.dash .row .l{grid-column:1}.dash .row .w{grid-column:1/-1}
+  .dash .acct{grid-template-columns:1fr 1fr}
   .tiles{gap:6px}.tile{padding:7px 8px}.tile .v{font-size:1.1rem}
   .plan{grid-template-columns:auto 1fr;gap:2px 10px}.plan span:nth-child(3n){grid-column:1/-1;color:var(--muted);margin-bottom:4px}
   .founder{grid-template-columns:72px 1fr;gap:14px}.founder .photo{width:72px}
@@ -245,40 +242,39 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
   <div class="dash" aria-label="Example of Kalmly's Today page for a fictional shop" id="demo">
     <div class="bar"><b>Fika Ceramics</b><span><span id="demo-date">Today</span> · example</span></div>
     <div class="sec">
-      <div class="askbar"><div class="in rest" id="ask-in"><span class="ty"></span><span class="ph">Ask anything about your ads, e.g. what should I scale?</span></div><span class="go">Ask</span></div>
-    </div>
-    <div class="sec">
-      <div class="sub"><span>Today's check</span><span>7 days to yesterday</span></div>
-      <div class="verdict">
-        <div class="vl"><i></i>Verdict · keep an eye on it</div>
-        <div class="vt">4.7× overall, above your 3× target. Gift sets lost money this week (€97 in, €87 back) and Vases is tiring.</div>
-        <div class="do"><b>Do today</b>Pause Gift sets. Nothing else in Ads Manager.</div>
+      <div class="greet" id="demo-greet">Good morning</div>
+      <div class="st">One thing needs your attention today.</div>
+      <div class="act">
+        <div class="al">Today</div>
+        <div class="at">Pause Gift sets.</div>
+        <div class="ev">€96.80 spent → €87.00 in sales · 0.9× return · target 3×</div>
+        <div class="rs">Two weeks below 1× on an ad almost nobody clicks.</div>
+        <div class="go"><span class="pbtn">Pause Gift sets</span><span class="did">I did it myself</span></div>
       </div>
-      <div class="tiles">
-        <div class="tile"><div class="k">Ad spend</div><div class="v">€832.20</div><div class="s">+4.1% vs week before</div></div>
-        <div class="tile"><div class="k">Real sales</div><div class="v">€3,899.30</div><div class="s">50 orders · +9.7%</div></div>
-        <div class="tile good"><div class="k">Real return</div><div class="v">4.7×</div><div class="s">sales ÷ ad spend · target 3×</div></div>
+      <div class="ek">Everything else</div>
+      <div class="rows">
+        <div class="row"><span class="n">Mugs</span><span class="r">6.4×</span><span class="l">Scale Thursday</span><span class="w">24 orders, untouched 19 days</span></div>
+        <div class="row"><span class="n">Workshops</span><span class="r">5.8×</span><span class="l">Leave it</span><span class="w">raised Friday, still learning</span></div>
+        <div class="row"><span class="n">Vases</span><span class="r">2.7×</span><span class="l">Getting tired</span><span class="w">seen 2.7 times per person</span></div>
+        <div class="row"><span class="n">Candles</span><span class="r">2.8×</span><span class="l">Too early to tell</span><span class="w">3 orders, needs 5</span></div>
       </div>
-      <table>
-        <tr><th>Product line</th><th class="r">Spend</th><th class="r hp">Sales</th><th class="r">Return</th><th>Numbers say</th></tr>
-        <tr><td><b>Mugs</b></td><td class="r">€318.40</td><td class="r hp">€2,046.50</td><td class="r"><b>6.4×</b></td><td><span class="chip ok">▲ above target</span></td></tr>
-        <tr><td><b>Workshops</b></td><td class="r">€207.15</td><td class="r hp">€1,201.00</td><td class="r"><b>5.8×</b></td><td><span class="chip ok">▲ above target</span></td></tr>
-        <tr><td><b>Vases</b></td><td class="r">€168.60</td><td class="r hp">€451.30</td><td class="r"><b>2.7×</b></td><td><span class="chip watch">■ near target</span></td></tr>
-        <tr><td><b>Gift sets</b></td><td class="r">€96.80</td><td class="r hp">€87.00</td><td class="r"><b>0.9×</b></td><td><span class="chip act">▼ below target</span></td></tr>
-        <tr><td><b>Candles</b> <span class="flat">new</span></td><td class="r">€41.25</td><td class="r hp">€113.50</td><td class="r flat">3 orders</td><td><span class="chip early">… too few to judge</span></td></tr>
-      </table>
+      <div class="ek">Last 7 days</div>
+      <div class="acct"><div><small>Spent</small><b>€832</b></div><div><small>Sales</small><b>€3,899</b></div><div><small>Return</small><b>4.7×</b></div><div><small>Your target</small><b>3×</b></div></div>
     </div>
     <div class="sec chat">
+      <div class="asklabel">Ask Kalmly anything about your ads</div>
+      <div class="askbar"><div class="in rest" id="ask-in"><span class="ty"></span><span class="ph">e.g. can I raise Mugs this week?</span></div><span class="go">Ask</span></div>
       <div class="q" data-step="1"><b>You asked</b><span class="qt" data-text="What's the status of my ads today?">What's the status of my ads today?</span></div>
-      <div class="a" data-step="2"><p>Four of five lines pay back above your 3× target and the account returned 4.7× on €832. Gift sets is the exception at 0.9×. Candles is too new to judge: 3 orders. Nothing is saturated, 1.7 views per person.</p></div>
+      <div class="a" data-step="2"><div class="ah">Kalmly · 08:11</div><p>Four of five lines pay back above your 3× target and the account returned 4.7× on €832. Gift sets is the exception at 0.9×. Candles is too new to judge: 3 orders. Nothing is saturated, 1.7 views per person.</p></div>
       <div class="q" data-step="3"><b>You asked</b><span class="qt" data-text="What should I scale, and what should I change?">What should I scale, and what should I change?</span></div>
       <div class="a" data-step="4">
+        <div class="ah">Kalmly · 08:14</div>
         <div class="plan">
-          <b>Mugs</b><span class="act up">Scale</span><span>€45 → €54 a day, Thursday</span>
-          <b>Workshops</b><span class="act hold">Hold</span><span>raised Friday, still learning</span>
-          <b>Vases</b><span class="act hold">Change</span><span>new video, not more budget</span>
-          <b>Gift sets</b><span class="act down">Pause</span><span>€97 in, €87 back</span>
-          <b>Candles</b><span class="act flat">Wait</span><span>3 orders; judge on Monday</span>
+          <b>Mugs</b><span class="act2">Scale</span><span>€45 → €54 a day, Thursday</span>
+          <b>Workshops</b><span class="act2">Hold</span><span>raised Friday, still learning</span>
+          <b>Vases</b><span class="act2">Change</span><span>new video, not more budget</span>
+          <b>Gift sets</b><span class="act2">Pause</span><span>€97 in, €87 back</span>
+          <b>Candles</b><span class="act2">Wait</span><span>3 orders; judge on Monday</span>
         </div>
         <p>One edit today: pause Gift sets. Mugs goes up on Thursday; three days between changes keeps Meta's learning intact.</p>
       </div>
@@ -294,17 +290,17 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
     <div class="steps">
       <div><div class="n">1</div><div><h3>Start the trial</h3><p>Card on file, nothing charged for 7 days. Your dashboard is ready the moment you sign up.</p></div></div>
       <div><div class="n">2</div><div><h3>Connect your ads and your shop</h3><p>Connect your ad account with one click through Facebook or share it by hand, then link Shopify, Wix, WooCommerce, Webflow, Squarespace, Stripe, Mollie, PayPal, HubSpot or your own site. View-only unless you switch on approvals; remove Kalmly any time a budget or an ad.</p></div></div>
-      <div><div class="n">3</div><div><h3>Read one decision each morning</h3><p>Describe what you sell in two lines. From the next morning you get a verdict, the reason and at most one action with exact amounts, on your dashboard and by email or Telegram if you like. Most days: "leave it".</p></div></div>
+      <div><div class="n">3</div><div><h3>Read one decision each morning</h3><p>Tell Kalmly what you sell in three lines. From the next morning you get one line on how your ads are doing, the reason and at most one action with exact amounts, on your dashboard and by email or Telegram if you like. Most days: "leave it".</p></div></div>
     </div>
     <div>
       <div class="mail">
-        <div class="mh"><b>Fika Ceramics — ad check, Tue 6 Oct</b>from Kalmly · 08:02</div>
+        <div class="mh"><b>One thing needs your attention today.</b>from Kalmly · 08:02</div>
         <div class="mb">
-          <b>Verdict:</b> keep an eye on it. Gift sets lost money this week (0.9×). Vases is tiring (seen 2.7 times per person, click rate down 31%).
-          <b>Money:</b> €832 spent over 7 days, €3,899 in real shop sales: 4.7× return, above your 3× target.
-          <b>Per product line:</b> Mugs 6.4× — scale Thursday · Workshops 5.8× — hold, raised Friday · Vases 2.7× — change the creative · Gift sets 0.9× — pause · Candles — 3 orders, too few to judge.
-          <b>Do today:</b> pause Gift sets. Nothing else in Ads Manager. Brief a second Vases video.
-          <b>Next up:</b> Thursday, if Mugs holds above 3×: raise it from €45 to €54 a day.
+          <b>Today:</b> Pause Gift sets.
+          €96.80 spent → €87.00 in sales · 0.9× return · target 3×<br>Two weeks below 1× on an ad almost nobody clicks; the one order was €87.
+          <b>Everything else</b>
+          Mugs · Scale Thursday · 24 orders, untouched 19 days<br>Workshops · Leave it · raised Friday, still learning<br>Vases · Getting tired · seen 2.7 times per person<br>Candles · Too early to tell · 3 orders, needs 5
+          <b>The numbers, your ads and the full check:</b> app.kalmly.io/c/…
         </div>
       </div>
       <p class="mailnote">What the email looks like. A real check, numbers changed.</p>
@@ -315,8 +311,8 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
 <section>
   <h2>What Kalmly does, and what it leaves to you</h2>
   <div class="blocks">
-    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div class="crop"><div class="ct"><span>Product line</span><span>Return</span><span></span></div><div class="cr"><span>Mugs</span><span>6.4×</span><span class="cc ok">▲ above target</span></div><div class="cr"><span>Vases</span><span>2.7×</span><span class="cc watch">■ near target</span></div><div class="cr"><span>Gift sets</span><span>0.9×</span><span class="cc act">▼ below target</span></div></div><h3>Judged on your real sales</h3><p>Every ad set is measured on real shop revenue divided by ad spend, per product line, city or service. Meta's own purchase count is shown too, and labelled as the estimate it is.</p></div>
-    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><div class="crop"><div class="cv"><i></i><span>Verdict · keep an eye on it</span></div><div class="cb">Gift sets lost money this week. Vases is tiring (seen 2.7× per person).</div><div class="cd"><b>Do today</b>Pause Gift sets. Nothing else in Ads Manager.</div></div><h3>One decision, and most days it is "leave it"</h3><p>Each morning: a verdict, the reason, and at most one action. Most days the right action is none, and Kalmly says so, with the numbers that justify it.</p></div>
+    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div class="crop"><div class="ct"><span>Product line</span><span>Return</span><span></span></div><div class="cr"><span>Mugs</span><span>6.4×</span><span class="cc">Ready to grow</span></div><div class="cr"><span>Vases</span><span>2.7×</span><span class="cc">Getting tired</span></div><div class="cr"><span>Gift sets</span><span>0.9×</span><span class="cc">Losing money</span></div></div><h3>Judged on your real sales</h3><p>Every ad set is measured on real shop revenue divided by ad spend, per product line, city or service. Meta's own purchase count is shown too, and labelled as the estimate it is.</p></div>
+    <div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><div class="crop"><div class="cv">One thing needs your attention today.</div><div class="cd"><b>Today</b>Pause Gift sets.<small>€96.80 spent → €87.00 in sales · 0.9× return</small></div></div><h3>One decision, and most days it is "leave it"</h3><p>Each morning: how your ads are doing, the reason, and at most one action. Most days the right action is none, and Kalmly says so, with the numbers that justify it.</p></div>
     <div class="plain"><div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Nothing changes without your say</h3><p>By default Kalmly only reads: it names the edit and you make it in Ads Manager. Switch on approvals and each proposed pause, restart or budget change gets an Approve button, and Kalmly makes it only after your tap.</p></div><div class="crop"><div class="cq">What should I scale?</div><div class="ca">Raise <b>Mugs</b> from €45 to €54 a day on Thursday. Hold Workshops. Vases: new video, not budget. Pause Gift sets today.</div><div class="cp">Read-only · you make the change</div></div></div>
   </div>
 </section>
@@ -466,7 +462,7 @@ footer.big .bottom{border-top:1px solid var(--rule);padding-top:14px;font-size:.
     }
     next(700);
   }
-  try { document.getElementById("demo-date").textContent = new Date().toLocaleDateString("en-GB", {weekday:"long", day:"numeric", month:"short"}); } catch (e) {}
+  try { document.getElementById("demo-date").textContent = new Date().toLocaleDateString("en-GB", {weekday:"short", day:"numeric", month:"short"}); var hh = new Date().getHours(); document.getElementById("demo-greet").textContent = hh < 12 ? "Good morning" : hh < 18 ? "Good afternoon" : "Good evening"; } catch (e) {}
   document.getElementById("replay").addEventListener("click", function(e){ e.preventDefault(); run(); });
   run();
 })();
