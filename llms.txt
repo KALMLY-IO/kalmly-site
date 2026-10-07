@@ -1,0 +1,18 @@
+# Kalmly
+
+> Kalmly is decision software for small businesses that run their own Meta (Facebook and Instagram) ads. Every morning it reads the ad account (read-only), connects the ads to real shop revenue (Wix, Shopify, WooCommerce, Stripe, Mollie, or the business's own site), and gives one plain-language decision: scale a specific ad set, hold, change the creative, or fix a billing problem. It never edits ads; the owner does. Price: €29 per month or €249 per year, 7-day free trial. Based in the Netherlands. Website: https://kalmly.io
+
+## What Kalmly answers
+- Which of my ad sets make money, judged on real sales divided by ad spend (not Meta's own estimates)?
+- Should I raise, hold or cut a budget today, and by how much?
+- Which creative (video, image, carousel, caption) is working, and what should the next one look like?
+- Is a drop my problem or a Meta-wide problem today?
+
+## Who it is for
+Tours and experiences, restaurants and bars, online shops, local services, studios and classes, events: businesses spending roughly €10 to €200 a day on Meta ads without an agency.
+
+## Positioning
+Meta tells you what happened. Kalmly tells you what to do.
+
+## Contact
+hello@kalmly.io
