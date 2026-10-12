@@ -7,108 +7,481 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <style>
-/* Same look as the app: paper page, white sheets, navy text, royal for links and the selected tab.
-   Orange only on the marker beside today's action, the primary button and the logo's "ly". Status is words, never colour. */
-:root{
-  --paper:#F3F6FB;--paper-2:#E6EDF8;--card:#FFFFFF;--ink:#0B1A33;--muted:#4A5B78;--rule:#D7DFEC;--link:#1E3FA6;--accent:#D0451A;--accent-deep:#B83A14;--accent-ink:#FFFFFF;
-  --r-ctl:10px;--r-card:16px;
-  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif;
+/* Kalmly app: the light half of the "Royal" design (brand/explorations/blue-v2/variants/p3-royal.html).
+   Paper page, white sheets, navy text, slate for the quiet lines, royal blue for links, the selected tab and
+   the answer rule. Orange appears in exactly three places: the thin vertical marker beside today's action,
+   the primary button and the logo's "ly". Status is always words, never a colour.
+   Bricolage Grotesque for headings and figures, Instrument Sans for everything else. */
+:root{--bg:#F3F6FB;--surface:#FFFFFF;--tint:#E6EDF8;--line:#D7DFEC;--ink:#0B1A33;--muted:#4A5B78;--link:#1E3FA6;
+  --accent:#D0451A;--accent-deep:#B83A14;--accent-ink:#FFFFFF;
   --shadow:0 1px 2px rgba(11,26,51,.05),0 14px 40px -18px rgba(11,26,51,.18);
-  color-scheme:light;
-}
+  --r-ctl:10px;--r-card:16px;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Instrument Sans",-apple-system,"Segoe UI",system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--body);padding:0 16px 72px;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding:0 16px 72px;overflow-x:hidden}
 ::selection{background:var(--link);color:#fff}
-:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:4px}
 a{color:var(--link)}
-.brand{display:flex;align-items:center;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto}
+
+/* header + nav */
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0 10px;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;font:700 1.35rem var(--display);letter-spacing:-.03em;text-decoration:none;color:var(--ink)}
+.brand b{color:var(--accent)}
 .brand .wm{display:block;height:24px;width:auto}
-.btn{display:inline-block;padding:12px 20px;border-radius:var(--r-ctl);font-weight:600;text-decoration:none;font-size:1rem;border:1px solid transparent;white-space:nowrap;line-height:1.3;transition:background .2s,border-color .2s,transform .2s}
-.btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 24px -10px rgba(208,69,26,.6)}
-.btn.primary:hover{background:var(--accent-deep);transform:translateY(-1px)}
-.btn.ink{background:var(--ink);color:#fff}
-.btn.ghost{background:transparent;border-color:rgba(11,26,51,.3);color:var(--ink)}
-.btn.ghost:hover{border-color:var(--ink);background:rgba(11,26,51,.04)}
-.btn.small{padding:8px 14px;font-size:.9rem}
-.muted{color:var(--muted)}
-.app{max-width:720px;margin:0 auto}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:22px 0 10px;gap:12px;flex-wrap:wrap}
-.topbar nav{display:flex;gap:2px;flex-wrap:wrap}
-.topbar nav a{color:var(--muted);text-decoration:none;font-size:.95rem;padding:6px 10px;white-space:nowrap}
-.topbar nav a.on{color:var(--link);font-weight:700;border-bottom:2px solid var(--link);padding-bottom:4px}
-.banner{color:var(--muted);border-bottom:1px solid var(--rule);padding:10px 0;font-size:.9rem;margin:8px 0 0}
-.topline{font-size:.82rem;color:var(--muted);margin:22px 0 2px}
-h1{font:700 2rem/1.15 var(--display);letter-spacing:-.03em;margin:0 0 20px;font-variation-settings:"opsz" 96}
-.state{font:600 1.3rem/1.35 var(--display);letter-spacing:-.015em;margin:0 0 6px;max-width:34ch}
-.health{color:var(--muted);margin:0;max-width:60ch}
-.today{margin:48px 0 44px;padding:4px 0 4px 22px;border-left:4px solid var(--accent)}
-.today .label{font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:10px}
-.today .action{font:700 2rem/1.15 var(--display);letter-spacing:-.025em;margin:0 0 14px;max-width:24ch}
+nav{display:flex;gap:2px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem;padding:6px 10px;border-radius:var(--r-ctl);white-space:nowrap}
+nav a.on{color:var(--link);font-weight:700;border-bottom:2px solid var(--link);border-radius:0;padding-bottom:4px}
+nav a:hover{color:var(--ink)}
+.stepline{font-size:.85rem;color:var(--muted);font-weight:600}
+
+/* type */
+h1{font:700 1.8rem/1.15 var(--display);letter-spacing:-.03em;margin:18px 0 8px;text-wrap:balance;font-variation-settings:"opsz" 96}
+h2{font:700 1.15rem/1.3 var(--display);letter-spacing:-.01em;margin:0 0 10px}
+h3{font:700 1rem/1.3 var(--display);margin:0 0 6px}
+p{margin:0 0 12px}
+p.lead{color:var(--muted);margin:0 0 24px;font-size:1.02rem;max-width:60ch}
+small,.muted{color:var(--muted)}
+small{font-size:.86rem}
+.sub{font-size:.8rem;color:var(--muted);margin:20px 0 8px;font-weight:600}
+.prewrap{white-space:pre-wrap}
+.hide{display:none}
+
+/* ---------- the Today page ---------- */
+.topline{font-size:.82rem;color:var(--muted);margin:22px 0 2px;letter-spacing:.01em}
+h1.greet{margin:0 0 20px;font-size:2rem}
+.state{font:600 1.3rem/1.35 var(--display);letter-spacing:-.015em;margin:0 0 6px;max-width:34ch;text-wrap:balance}
+.health{color:var(--muted);margin:0 0 8px;max-width:60ch;font-size:1rem}
+.health .btn{vertical-align:middle}
+
+.today{margin:48px 0 44px;padding:4px 0 4px 22px;border-left:4px solid var(--line)}
+.today.move{border-left-color:var(--accent)}
+.today .label{font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:10px}
+.today .action{font:700 2rem/1.15 var(--display);letter-spacing:-.025em;margin:0 0 14px;text-wrap:balance;max-width:24ch;font-variation-settings:"opsz" 96}
+.today .action.long{font-size:1.35rem;line-height:1.3;max-width:40ch;letter-spacing:-.015em}
 .today .evidence{font-size:1.05rem;font-weight:600;margin:0 0 6px;font-variant-numeric:tabular-nums}
 .today .reason{color:var(--muted);font-size:.95rem;margin:0;max-width:56ch}
 .moves{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:22px}
-.moves .help{flex-basis:100%;margin:0;font-size:.86rem;color:var(--muted)}
-h2.k{font:600 .78rem var(--body);color:var(--muted);margin:0 0 4px}
-.rows{border-top:1px solid var(--rule);margin-bottom:40px}
-.row{display:grid;grid-template-columns:minmax(120px,1.1fr) 64px minmax(110px,1fr) 1.4fr;gap:6px 16px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--rule);font-size:.98rem}
-.row .name{font-weight:700}.row .ret{font-family:var(--display);font-variant-numeric:tabular-nums;font-weight:700;text-align:right}.row .lab{font-weight:600}.row .why{color:var(--muted);font-size:.9rem}
-.acct .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:14px 0}
-.acct .nums small{display:block;font-size:.78rem;color:var(--muted)}
+.moves form{margin:0}
+.moves .btn{margin:0}
+.moves .help{margin:0;flex-basis:100%}
+.moves .quiet{color:var(--muted);font-size:.92rem}
+
+.else{margin:0 0 40px}
+.else h2{font-size:.8rem;color:var(--muted);font-family:var(--body);font-weight:600;margin:0 0 4px}
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(120px,1.1fr) 64px minmax(110px,1fr) 1.4fr;gap:6px 16px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);font-size:.98rem}
+.row .name{font-weight:700}
+.row .ret{font-family:var(--display);font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.row .lab{font-weight:600}
+.row .why{color:var(--muted);font-size:.9rem}
+
+.acct{margin:0 0 10px}
+.acct .k{font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:8px}
+.acct .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0}
+.acct .nums div{min-width:0}
+.acct .nums small{display:block;font-size:.78rem;color:var(--muted);margin-bottom:1px}
 .acct .nums b{font:700 1.25rem/1.2 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.acct .more{margin:10px 0 0;font-size:.92rem}.acct .more a{color:var(--link)}
-.checked{font-size:.82rem;color:var(--muted);margin:14px 0 40px}
+.acct .more{margin:10px 0 0;font-size:.92rem}
+.acct .more a{color:var(--link)}
+.checked{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;font-size:.82rem;color:var(--muted);margin:14px 0 40px}
+.checked a{color:inherit}
+form.inline{display:inline;margin:0}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--muted);text-decoration:underline;cursor:pointer}
+.linkbtn[disabled]{opacity:.6;cursor:progress}
+form.inline .working{display:inline;margin-left:8px}
+
+/* ask */
 .ask{margin:0 0 44px}
-.ask label{display:block;font-size:.95rem;font-weight:600;margin:0 0 8px}
-.askrow{display:flex;gap:10px}
-.askrow input{flex:1;padding:11px 14px;border:1px solid var(--rule);border-radius:var(--r-ctl);font:inherit;font-size:1rem;background:var(--card);min-width:0;color:var(--ink)}
+.ask label{font-size:.95rem;font-weight:600;margin:0 0 8px}
+.askrow{display:flex;gap:10px;align-items:stretch}
+.askrow input{flex:1;font-size:1rem;padding:11px 14px;background:var(--surface)}
+.askrow .btn{margin:0;padding:0 18px;background:var(--ink);color:#fff;box-shadow:none}
+.askrow .btn:hover{background:#142A70}
 .chat{margin-top:18px}
 .chat .q{font-weight:600;margin:16px 0 6px;font-size:.95rem}
 .chat .a{border-left:2px solid var(--link);padding:2px 0 2px 14px;line-height:1.55;font-size:.95rem}
-.chat .ahead{font-size:.76rem;color:var(--muted);margin-bottom:4px}
-.chat .a p{margin:0 0 10px}.chat .a p:last-child{margin-bottom:0}
-.alabel{display:block;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:2px}
-details.sec{border-top:1px solid var(--rule);padding:14px 0}
-details.sec:last-of-type{border-bottom:1px solid var(--rule)}
+.chat .ahead{font-size:.76rem;color:var(--muted);letter-spacing:.02em;margin-bottom:4px}
+.chat .a p{margin:0 0 10px;white-space:pre-wrap}.chat .a p:last-child{margin-bottom:0}
+.alabel{display:block;font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:2px;white-space:normal}
+.ask form.busy+.help{display:none}
+
+/* collapsed account details */
+.details{display:none;margin:0 0 20px}
+.details.open,.details:target{display:block}
+details.sec{border-top:1px solid var(--line);padding:14px 0}
+details.sec:last-child{border-bottom:1px solid var(--line)}
 details.sec>summary{cursor:pointer;font:700 1.05rem var(--display);list-style:none;display:flex;align-items:center;gap:10px}
 details.sec>summary::-webkit-details-marker{display:none}
 details.sec>summary::before{content:"";width:8px;height:8px;border-right:2px solid var(--link);border-bottom:2px solid var(--link);transform:rotate(-45deg);transition:transform .15s;flex:none;margin-left:2px}
 details.sec[open]>summary::before{transform:rotate(45deg)}
-details.sec>summary small{font-weight:400;font-family:var(--body);color:var(--muted);font-size:.86rem}
+details.sec>summary small{font-weight:400;font-family:var(--body)}
 details.sec>.inner{margin-top:14px}
+details.plain{border:0;padding:0;margin-top:8px}
+details.plain>summary{font:600 .95rem var(--body);color:var(--muted)}
+.story p{margin:0 0 14px;max-width:65ch;white-space:pre-wrap}
+.story h3{margin-top:16px}
+.earlier{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.earlier small{display:block;margin-bottom:6px}
+.brief{font-size:.92rem}
+
+/* the numbers (tiles) are plain: no status colours */
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px 18px;margin:4px 0 8px}
-.tile{padding:8px 0;border-top:1px solid var(--rule);min-width:0}
-.tile .k{font-size:.78rem;color:var(--muted);font-weight:600}.tile .v{font:700 1.4rem/1.2 var(--display);letter-spacing:-.02em;margin:2px 0;font-variant-numeric:tabular-nums}.tile .s{font-size:.76rem;color:var(--muted);line-height:1.4}
-table.data{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
-table.data td,table.data th{text-align:left;padding:9px 8px;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:top}
-table.data tr:last-child td{border-bottom:0}
-table.data th{font-size:.78rem;color:var(--muted);font-weight:600}
-.adgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-.ad .ph{aspect-ratio:4/5;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-ctl);display:grid;place-items:end;padding:10px;font-size:.72rem;color:var(--muted)}
-.ad .m{padding:8px 0 0;font-size:.82rem;color:var(--muted)}.ad .m b{display:block;color:var(--ink);font-size:.92rem}
-.insight{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule)}
-.insight h3{font:700 1.05rem var(--display);margin:0 0 8px}.insight p{margin:0 0 6px;max-width:60ch}.insight ul{margin:0 0 8px;padding-left:18px}
-.story p{margin:0 0 14px;max-width:65ch}.story h3{font:700 1rem var(--display);margin:16px 0 6px}
-.sticky-cta{position:sticky;bottom:12px;background:var(--ink);color:#EEF2FB;border-radius:var(--r-card);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:36px;flex-wrap:wrap;box-shadow:0 20px 50px -20px rgba(11,26,51,.6)}
-.sticky-cta .btn{margin:0}
+.tile{min-width:0;padding:8px 0;border-top:1px solid var(--line)}
+.tile .k{font-size:.78rem;color:var(--muted);font-weight:600}
+.tile .v{font:700 1.4rem/1.2 var(--display);letter-spacing:-.02em;margin:2px 0;font-variant-numeric:tabular-nums}
+.tile .s{font-size:.76rem;color:var(--muted);line-height:1.4}
+
+/* ad gallery + creative insight */
+.adgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.ad{min-width:0}
+.ad img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--tint);border-radius:var(--r-ctl)}
+.ad .noimg{aspect-ratio:4/5;display:grid;place-items:center;color:var(--muted);background:var(--tint);border:1px solid var(--line);border-radius:var(--r-ctl);text-transform:capitalize}
+.ad .meta{padding:8px 0 0}
+.ad .meta b{display:block;font-size:.92rem;line-height:1.3}
+.ad .meta small{display:block;color:var(--muted);margin:2px 0 4px}
+.ad .nums{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.insight{margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
+.insight h3{font-size:1.05rem;margin-bottom:8px}
+.insight p{margin:0 0 6px;max-width:60ch}
+.insight ul{margin:0 0 8px;padding-left:18px}
+.insight li{margin:2px 0}
+
+/* other pages: sections separated by space and hairlines, not boxes */
+.set{padding:26px 0;border-top:1px solid var(--line)}
+.set:first-of-type{border-top:0;padding-top:4px}
+.set>h2{margin-bottom:12px}
+.onboard{max-width:560px;padding:12px 0 0}
+.onboard h1{font-size:2rem}
+.onboard .skip{margin-top:26px}
+.onboard .skip .linkbtn{font-size:.92rem}
+
+/* cards (still used on sign-up, login, errors, admin): white sheets with a soft navy shadow */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:20px;margin:14px 0;box-shadow:var(--shadow)}
+.card>h2:first-child{margin-top:0}
+.notice{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r-card);padding:16px 18px;color:var(--muted)}
+
+/* flashes: system messages, quiet; an error is the same navy, set in bold words */
+.flash{padding:10px 0;margin:10px 0 0;border-bottom:1px solid var(--line);color:var(--ink);font-weight:500;font-size:.95rem}
+.flash.err{color:var(--ink);font-weight:600}
+.flash.note{color:var(--muted);font-size:.85rem}
+.flash a{color:inherit}
+
+/* forms */
+label{display:block;font-weight:600;margin:18px 0 6px}
+label:first-child{margin-top:0}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:var(--r-ctl);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:1rem;min-height:46px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--link);outline-offset:1px;border-color:var(--link)}
+textarea{min-height:110px;resize:vertical}
+input[type=checkbox],input[type=radio]{width:20px;height:20px;min-height:0;padding:0;margin:0;accent-color:var(--link);flex:none}
+.check{display:flex;gap:12px;align-items:flex-start;font-weight:600;margin:12px 0;cursor:pointer}
+.check .t{font-weight:600;color:var(--ink)}
+.check .t small{display:block;font-weight:400;color:var(--muted);font-size:.88rem}
+.check input:disabled+.t{color:var(--muted)}
+.help{display:block;color:var(--muted);font-size:.86rem;margin-top:6px;line-height:1.5}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:20px}
+.actions .btn{margin-top:0}
+.actions small{flex-basis:100%}
+.btn{display:inline-block;padding:12px 20px;border-radius:var(--r-ctl);border:1px solid transparent;background:var(--accent);color:var(--accent-ink);cursor:pointer;font:inherit;font-weight:600;text-decoration:none;margin-top:12px;line-height:1.3;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 24px -10px rgba(208,69,26,.6);transition:background .2s,border-color .2s}
+.btn:hover{background:var(--accent-deep)}
+.btn.ghost{background:transparent;border-color:rgba(11,26,51,.3);color:var(--ink);box-shadow:none}
+.btn.ghost:hover{background:rgba(11,26,51,.04);border-color:var(--ink)}
+.btn.small{padding:8px 14px;font-size:.9rem;margin-top:0}
+.btn[disabled],.btn[aria-busy=true]{opacity:.6;cursor:progress;filter:none}
+.working{display:none;color:var(--muted);font-size:.9rem;margin-top:8px}
+form.busy .working{display:block}
+.working::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--link);border-radius:50%;margin-right:8px;vertical-align:-2px;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+a:focus-visible,.btn:focus-visible,summary:focus-visible,.chip:focus-visible,nav a:focus-visible,.linkbtn:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:var(--r-ctl)}
+
+/* lists, code, tables, tags */
+ol.howto{padding-left:22px;margin:8px 0}ol.howto li{margin:8px 0;padding-left:4px}
+code{background:var(--surface);border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:.92em;word-break:break-all}
+table{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+td,th{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+table.data th{font-size:.78rem;color:var(--muted);font-weight:600;white-space:nowrap}
+table.data td{white-space:nowrap}
+table.data td.wrap,table.data td.main{white-space:normal}
+table.data td.main{min-width:120px}
+table.tight{font-size:.84rem}table.tight td,table.tight th{padding:7px 5px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.8rem;background:var(--surface);border:1px solid var(--line);white-space:nowrap;font-weight:600}
+.tag.ok,.tag.warn,.tag.bad{background:var(--surface);color:var(--ink)}
+.seg{display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:8px;margin:6px 0}
+.seg.head{font-size:.8rem;color:var(--muted);margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--surface);color:var(--ink);font:inherit;font-size:.9rem}
+.chip:hover{border-color:var(--link);color:var(--link)}
+.segprev{margin:-4px 0 10px}
+details.danger{margin-top:16px}
+details.danger>summary{cursor:pointer;color:var(--muted);font-size:.92rem}
+.foot{font-size:.85rem;color:var(--muted);margin-top:36px}
+
+/* phones */
 @media (max-width:560px){
-  .topbar nav{width:100%;overflow-x:auto;flex-wrap:nowrap;margin:0 -16px;padding:0 12px 4px;scrollbar-width:none}
-  h1{font-size:1.7rem}.state{font-size:1.15rem}
-  .today{margin:36px 0 34px;padding-left:16px}.today .action{font-size:1.6rem}.today .evidence{font-size:.98rem}
-  .row{grid-template-columns:1fr auto;gap:2px 12px;padding:10px 0}.row .lab{grid-column:1}.row .why{grid-column:1/-1}
-  .acct .nums{grid-template-columns:1fr 1fr;gap:12px 16px}.acct .nums b{font-size:1.15rem}
+  body{padding:0 16px 56px}
+  header{padding-top:16px}
+  nav{width:100%;overflow-x:auto;flex-wrap:nowrap;margin:0 -16px;padding:0 12px 4px;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  h1{font-size:1.55rem}
+  h1.greet,.onboard h1{font-size:1.7rem}
+  .state{font-size:1.15rem}
+  .today{margin:36px 0 34px;padding-left:16px}
+  .today .action{font-size:1.6rem}
+  .today .action.long{font-size:1.2rem}
+  .today .evidence{font-size:.98rem}
+  .row{grid-template-columns:1fr auto;gap:2px 12px;padding:10px 0}
+  .row .lab{grid-column:1}
+  .row .why{grid-column:1/-1}
+  .acct .nums{grid-template-columns:1fr 1fr;gap:12px 16px}
+  .acct .nums b{font-size:1.15rem}
   .askrow{flex-direction:column}
-  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}.tile .v{font-size:1.25rem}
+  .askrow .btn{padding:12px 20px}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}
+  .tile .v{font-size:1.25rem}
+  .card{padding:16px}
+  .seg{grid-template-columns:1fr;gap:6px;margin:10px 0}
+  #segs .seg{padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .seg.head{display:none}
   .adgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  /* tables become stacked rows: each cell shows its own label */
   table.stack thead{display:none}
-  table.stack tr{display:block;padding:10px 0;border-bottom:1px solid var(--rule)}
+  table.stack tr{display:block;padding:10px 0;border-bottom:1px solid var(--line)}
   table.stack tr:last-child{border-bottom:0}
   table.stack td{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border:0;padding:3px 0;white-space:normal}
   table.stack td::before{content:attr(data-label);color:var(--muted);font-size:.78rem;flex:none}
   table.stack td.main{display:block;font-size:1rem;padding-bottom:4px}
   table.stack td.main::before{display:none}
 }
-</style></head><body>
+
+/* ---------- something to add ---------- */
+.newthing{margin:0 0 44px;padding:4px 0 4px 22px;border-left:4px solid var(--line)}
+.newthing .label{font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:10px}
+.newthing .add-text{font:600 1.25rem/1.3 var(--display);letter-spacing:-.015em;margin:0 0 14px;max-width:40ch;text-wrap:balance}
+.add-facts{margin:0 0 6px;max-width:60ch}
+.add-facts div{display:grid;grid-template-columns:9.5rem 1fr;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.add-facts div:last-child{border-bottom:1px solid var(--line)}
+.add-facts dt{color:var(--muted);font-size:.86rem}
+.add-facts dd{margin:0;font-size:.97rem}
+.newthing .steps{margin:12px 0 4px;max-width:60ch}
+.newthing .steps summary{cursor:pointer;font-weight:600;font-size:.95rem}
+.newthing .steps ol{margin:10px 0 0;padding-left:1.3rem}
+.newthing .steps li{margin:0 0 6px;font-size:.95rem}
+.newthing .tracked{color:var(--muted);font-size:.92rem;margin:12px 0 0;max-width:60ch}
+.newthing .tracked b{color:var(--ink)}
+@media (max-width:560px){.newthing{padding-left:16px}.add-facts div{grid-template-columns:1fr;gap:2px}}
+
+/* ---------- the first look ---------- */
+.flcard{margin:0 0 38px;padding:4px 0 4px 22px;border-left:4px solid var(--line)}
+.flcard .label{font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:8px}
+.fl-head{font:600 1.3rem/1.35 var(--display);letter-spacing:-.015em;margin:0 0 8px;max-width:36ch;text-wrap:balance}
+.fl-head.big{font-size:1.65rem;max-width:30ch}
+.fl-verdict{color:var(--ink);margin:0 0 10px;max-width:62ch;font-size:1.02rem}
+.pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--link);margin-right:8px;vertical-align:1px;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+.flwait{margin:22px 0 34px}
+.readlist{margin:10px 0 0;padding-left:1.2rem;color:var(--muted);font-size:.95rem}
+.flhead{margin:0 0 34px}
+.flmeta{margin:6px 0 4px}
+.flblock{margin:0 0 40px}
+.flblock>h2{font-size:1.15rem}
+.flblock>h2 small{font-family:var(--body);font-weight:400;color:var(--muted);font-size:.85rem;margin-left:6px}
+.flblock.urgent{border-left:4px solid var(--ink);padding-left:18px}
+.flblock.urgent h2{color:var(--ink)}
+.lvlh{font-size:.8rem;color:var(--muted);font-family:var(--body);font-weight:600;margin:20px 0 6px}
+.flist{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.flist li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.98rem;max-width:68ch}
+.flist .sev{display:inline-block;font-size:.76rem;font-weight:700;margin-right:8px;color:var(--muted);vertical-align:1px}
+.flist .sev-high .sev{color:var(--ink)}
+.tree,.tree ul{list-style:none;margin:0;padding:0}
+.tree .tree{margin:10px 0 0 6px;padding-left:18px;border-left:1px solid var(--line)}
+.node{margin:0 0 22px}
+.node .tree .node:last-child{margin-bottom:6px}
+.nhead{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.nhead .lvl{font-size:.76rem;color:var(--muted);font-weight:600}
+.nname{font:700 1.05rem/1.3 var(--display);letter-spacing:-.01em;word-break:break-word}
+.l-campaign>.nhead .nname{font-size:1.2rem}
+/* keep / change / new: the same three chips as the site's plan card */
+.act{font-size:.74rem;font-weight:700;letter-spacing:.01em;padding:2px 9px;border-radius:6px;border:1px solid var(--ink);background:var(--ink);color:#fff;line-height:1.3}
+.act.keep{background:rgba(30,63,166,.10);border-color:rgba(30,63,166,.35);color:var(--link)}
+.act.new{background:transparent;border:1px dashed rgba(11,26,51,.45);color:var(--ink)}
+.when{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.node .do{margin:4px 0 0;font-weight:600;font-size:.97rem}
+.node .why{margin:3px 0 0;color:var(--ink);font-size:.95rem;max-width:64ch}
+.node .stats{margin:2px 0 0;color:var(--muted);font-size:.84rem;font-variant-numeric:tabular-nums}
+.node .add-facts{margin:10px 0 0}
+.node .add-facts dd small{color:var(--muted)}
+.node .steps{margin:10px 0 4px;max-width:62ch}
+.node .steps summary{cursor:pointer;font-weight:600;font-size:.95rem}
+.node .steps ol{margin:10px 0 0;padding-left:1.3rem}
+.node .steps li{margin:0 0 6px;font-size:.95rem}
+.node .moves{margin-top:12px}
+.node .result{color:var(--ink);font-weight:500}
+.weeks .wk{display:grid;grid-template-columns:5rem 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.weeks .dd{font:700 .95rem var(--display)}
+.weeks .tt{font-size:.97rem;max-width:64ch}
+.nextup{margin:16px 0 0;font-size:1rem}
+@media (max-width:560px){.weeks .wk{grid-template-columns:1fr;gap:2px}.tree .tree{padding-left:12px;margin-left:2px}}
+
+/* ---------- dashboard v3: Update · Chat · Actions · Campaigns ---------- */
+.wrap{max-width:1040px}
+.blk{margin:0 0 52px}
+.blk>h2{font:600 .78rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+.blk>h2 small{letter-spacing:0;text-transform:none;font-weight:400;font-size:.82rem}
+.num{font-variant-numeric:tabular-nums}
+/* update */
+.headline{font:700 1.5rem/1.25 var(--display);letter-spacing:-.02em;margin:0 0 10px;max-width:30ch;text-wrap:balance}
+.totals{display:flex;flex-wrap:wrap;gap:6px 28px;margin:0 0 20px;font-size:.98rem}
+.totals>div{white-space:nowrap}
+.totals span{color:var(--muted)}.totals b{font-family:var(--display);font-weight:700}
+.sets{width:100%;border-collapse:collapse;font-size:.95rem;font-variant-numeric:tabular-nums;margin:0 0 26px}
+.sets th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.sets th:first-child,.sets td:first-child{text-align:left;padding-left:12px}
+.sets td{text-align:right;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.sets td:first-child{font-weight:600;white-space:normal}
+.sets td.r{font-family:var(--display);font-weight:700}
+.sets tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.sets tr.warn td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+.sets .mk{display:inline-block;margin-left:8px;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.sets tr.win .mk{color:var(--accent)}
+.finds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px}
+.find{min-width:0;padding:14px 0 4px;border-top:2px solid var(--ink)}
+.find .k{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px}
+.find h3{font:700 1.05rem/1.3 var(--display);margin:0 0 6px}
+.find p{font-size:.92rem;margin:0 0 6px;line-height:1.5}
+.find b{font-variant-numeric:tabular-nums}
+.reels{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:6px}
+.reels td{padding:5px 0;border-top:1px solid var(--line);vertical-align:top}
+.reels td:first-child{font-weight:600;padding-right:10px}
+.reels td+td{white-space:nowrap;color:var(--muted)}
+.reels td:last-child{color:var(--link);font-weight:600}
+/* chat */
+.thread{display:flex;flex-direction:column;gap:12px;margin:0 0 14px}
+.msg{max-width:78%;padding:12px 16px;border-radius:16px;font-size:.95rem;line-height:1.5}
+.msg .who{display:block;font-size:.72rem;color:var(--muted);margin-bottom:4px;letter-spacing:.02em}
+.msg.k{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.me{align-self:flex-end;background:var(--tint);border-bottom-right-radius:4px}
+.msg ol{margin:4px 0 0;padding-left:1.2rem}.msg li{margin:2px 0}
+.msg p{margin:0 0 6px}.msg p:last-child{margin:0}
+.compose{display:flex;gap:10px}
+.compose input{flex:1;background:var(--surface);min-height:48px}
+.compose .btn{margin:0;background:var(--ink);color:#fff;box-shadow:none;padding:0 22px}
+.compose .btn:hover{background:#142A70}
+/* actions */
+.acts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.acts li{display:grid;grid-template-columns:1fr auto auto;gap:8px 12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.acts .lvl{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+.acts .t{font-weight:600;font-size:1rem}
+.acts .t b{font-variant-numeric:tabular-nums}
+.acts .btn{margin:0}
+.acts li.done{color:var(--muted)}
+.acts li.done .t{font-weight:500;text-decoration:line-through;text-decoration-color:rgba(11,26,51,.3)}
+.acts li.done .st{grid-column:2/4;font-size:.9rem;white-space:nowrap}
+.acts li.done .st::before{content:"";display:inline-block;width:7px;height:12px;border-right:2px solid var(--link);border-bottom:2px solid var(--link);transform:rotate(45deg);margin:0 10px 2px 2px}
+.acts+.help{margin-top:12px}
+/* campaigns */
+.camps{border-top:1px solid var(--line)}
+.camps details{border-bottom:1px solid var(--line)}
+.camps summary{list-style:none;cursor:pointer;display:grid;gap:4px 12px;align-items:baseline;padding:12px 0;font-size:.95rem;font-variant-numeric:tabular-nums}
+.camps summary::-webkit-details-marker{display:none}
+.camps summary:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:6px}
+.camps .c>summary{grid-template-columns:18px minmax(160px,2fr) repeat(5,minmax(0,1fr))}
+.camps .s>summary{grid-template-columns:18px minmax(160px,2fr) repeat(5,minmax(0,1fr));padding-left:22px;font-size:.92rem}
+.camps .a{display:grid;grid-template-columns:18px minmax(160px,2fr) repeat(5,minmax(0,1fr));gap:4px 12px;align-items:baseline;padding:9px 0 9px 44px;font-size:.88rem;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.camps .car{width:8px;height:8px;border-right:2px solid var(--link);border-bottom:2px solid var(--link);transform:rotate(-45deg);display:inline-block;transition:transform .15s}
+.camps details[open]>summary .car{transform:rotate(45deg)}
+.camps .nm{font-weight:700;min-width:0}
+.camps .c>summary .nm{font-family:var(--display);font-size:1.05rem}
+.camps .nm small{display:block;font-weight:400;color:var(--muted);font-size:.74rem;letter-spacing:.03em}
+.camps .v{text-align:right;white-space:nowrap}
+.camps .v small{display:block;color:var(--muted);font-size:.72rem}
+.camps .v.r{font-family:var(--display);font-weight:700}
+.camps .hd{display:grid;grid-template-columns:18px minmax(160px,2fr) repeat(5,minmax(0,1fr));gap:12px;padding:8px 0 6px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line)}
+.camps .hd span{text-align:right}.camps .hd span:nth-child(2){text-align:left}
+.camps .s{border-top:1px solid var(--line);border-bottom:0}
+.camps .s:first-of-type{border-top:0}
+.camps .sub{padding-bottom:6px}
+.act.chg{background:var(--ink);color:#fff}
+.chipcell{text-align:right}
+@media (max-width:560px){
+  .wrap{max-width:none}
+  .finds{grid-template-columns:1fr}
+  .sets th:nth-child(5),.sets td:nth-child(5){display:none}
+  .sets{font-size:.88rem}.sets td,.sets th{padding:8px 4px}
+  .msg{max-width:92%}
+  .acts li{grid-template-columns:auto auto 1fr;justify-content:start}
+  .acts li>div{grid-column:1/-1}
+  .acts li.done .st{grid-column:1/-1}
+  .camps .c>summary,.camps .s>summary,.camps .a,.camps .hd{grid-template-columns:14px 1fr repeat(2,minmax(0,1fr))}
+  .camps .v:nth-child(n+5),.camps .hd span:nth-child(n+5){display:none}
+  .camps .a{padding-left:30px}
+}
+
+/* v3.1: goal row, funding strip, state chips, wider level tables */
+.goal{display:grid;grid-template-columns:1fr auto;gap:4px 24px;align-items:baseline;margin:0 0 10px}
+.goal .g{font:700 1.15rem/1.3 var(--display);letter-spacing:-.01em}
+.goal .g small{font:400 .78rem var(--body);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:2px}
+.goal .p{font-size:.92rem;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.goal .p b{color:var(--ink)}
+.bar{height:4px;background:var(--tint);border-radius:2px;margin:0 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:38%;background:var(--link)}
+.bar+.help{margin:0 0 36px}
+.fund{display:grid;grid-template-columns:1fr auto;gap:10px 24px;align-items:center;padding:16px 20px;margin:0 0 44px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;box-shadow:var(--shadow)}
+.fund .k{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:3px}
+.fund .t{font:700 1.1rem/1.35 var(--display);margin:0 0 2px}
+.fund .t b{font-variant-numeric:tabular-nums}
+.fund p{margin:0;font-size:.92rem;color:var(--muted)}
+.fund .btn{margin:0;white-space:nowrap}
+.trend{font-size:.82rem;color:var(--muted);font-weight:500}
+.sets td.r small,.camps .v.r small{font-weight:400;color:var(--muted)}
+.note{font-size:.82rem;color:var(--muted);margin:-18px 0 24px}
+.st{display:inline-block;padding:2px 9px;border-radius:6px;font-size:.74rem;font-weight:700;border:1px solid rgba(30,63,166,.35);background:rgba(30,63,166,.08);color:var(--link);line-height:1.3;white-space:nowrap}
+.st.win{background:var(--ink);border-color:var(--ink);color:#fff}
+.st.tired,.st.early,.st.learn{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.camps .c>summary{grid-template-columns:18px minmax(170px,2.2fr) repeat(5,minmax(0,1fr))}
+.camps .s>summary{grid-template-columns:18px minmax(150px,1.9fr) repeat(7,minmax(0,.9fr)) minmax(96px,1fr)}
+.camps .a{grid-template-columns:18px minmax(150px,1.9fr) repeat(7,minmax(0,.9fr)) minmax(96px,1fr)}
+.camps .hd.c7{grid-template-columns:18px minmax(170px,2.2fr) repeat(5,minmax(0,1fr))}
+.camps .hd.s9{grid-template-columns:18px minmax(150px,1.9fr) repeat(7,minmax(0,.9fr)) minmax(96px,1fr)}
+.camps .hd span b{display:block;font-weight:400;letter-spacing:0;text-transform:none;font-size:.68rem}
+.camps .v small.tr{display:inline;margin-left:4px}
+.camps .meta{display:block;font-size:.7rem;color:var(--muted);font-weight:400;margin-top:3px;white-space:normal}
+.camps .flag{display:block;font-size:.72rem;color:var(--muted);font-weight:400}
+.camps summary{font-size:.9rem}.camps .a{font-size:.86rem}
+.acts .ba{display:block;font-size:.88rem;color:var(--muted);margin-top:2px}
+.acts .ba b{color:var(--ink);font-variant-numeric:tabular-nums}
+.rules{font-size:.86rem;color:var(--muted);margin-top:14px;line-height:1.55;max-width:80ch}
+.rules b{color:var(--ink)}
+@media (max-width:560px){
+  .wrap{max-width:none}.goal{grid-template-columns:1fr}.goal .p{text-align:left}
+  .fund{grid-template-columns:1fr}
+  .camps .c>summary,.camps .hd.c7{grid-template-columns:14px 1fr repeat(2,minmax(0,1fr))}
+  .camps .s>summary,.camps .a,.camps .hd.s9{grid-template-columns:14px 1fr repeat(2,minmax(0,1fr))}
+  .camps .v:nth-child(n+5),.camps .hd span:nth-child(n+5){display:none}
+  .camps .chipcell{display:block!important;grid-column:1/-1;text-align:left;padding-left:14px}
+}
+
+.blk>h2{flex-wrap:wrap;gap:4px 12px}
+@media (max-width:560px){
+  .totals>div{white-space:normal}
+  .sets{font-size:.84rem}.sets td,.sets th{padding:8px 3px}.sets .mk{display:block;margin:2px 0 0}
+  .sets th:nth-child(5),.sets td:nth-child(5){display:none}
+}
+
+/* demo page only */
+.banner{color:var(--muted);border-bottom:1px solid var(--line);padding:10px 0;font-size:.9rem;margin:8px 0 0}
+.banner a{color:var(--link)}
+nav a{cursor:default}
+.compose .btn{display:inline-flex;align-items:center}
+.compose input[disabled]{color:var(--muted);background:var(--tint);border-color:var(--line)}
+.sticky-cta{position:sticky;bottom:12px;background:var(--ink);color:#EEF2FB;border-radius:var(--r-card);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:36px;flex-wrap:wrap;box-shadow:0 20px 50px -20px rgba(11,26,51,.6)}
+.sticky-cta .btn{margin:0}
+.checked{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+.foot{font-size:.86rem;color:var(--muted);margin:14px 0 0}
+@media (max-width:560px){nav{width:100%;overflow-x:auto;flex-wrap:nowrap;margin:0 -16px;padding:0 12px 4px;scrollbar-width:none}}
+</style></head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="wm" viewBox="0 0 660 190"><g transform="translate(6,146)">
 <path style="fill:var(--wm-k,#F3F6FB)" d="M12.98828125 0.0V-146.484375H47.265625V-67.48046875L84.375 -105.46875H122.0703125L83.88671875 -66.2109375L123.73046875 0.0H86.03515625L61.23046875 -42.48046875L47.265625 -28.02734375V0.0Z"/>
@@ -119,111 +492,70 @@ table.data th{font-size:.78rem;color:var(--muted);font-weight:600}
 <path style="fill:var(--wm-ly,#D0451A)" d="M541.953125 38.0859375V13.671875H560.5078125Q562.65625 13.671875 563.73046875 12.890625Q564.8046875 12.109375 565.68359375 9.86328125L570.17578125 -2.05078125L568.515625 9.765625L521.15234375 -105.46875H559.43359375L584.140625 -25.09765625L581.50390625 -25.29296875L606.11328125 -105.46875H644.39453125L595.859375 18.45703125Q591.3671875 29.98046875 583.701171875 34.033203125Q576.03515625 38.0859375 565.29296875 38.0859375Z"/>
 </g></symbol>
 </defs></svg>
-<div class="app">
-<div class="topbar"><a class="brand" href="/" aria-label="Kalmly home"><svg class="wm" viewBox="0 0 660 190" style="--wm-k:#0B1A33;--wm-ly:#D0451A" width="83" height="24"><use href="#wm"/></svg></a><nav><a class="on">Today</a><a>Ads</a><a>Sales</a><a>Ask</a><a>Settings</a></nav></div>
-<div class="banner">Demo: a fictional ceramics shop, numbers made up, nothing is connected. <a href="/start">Start your own, 7 days free →</a></div>
+<div class="wrap">
+<header><a class="brand" href="/" aria-label="Kalmly home"><svg class="wm" viewBox="0 0 660 190" style="--wm-k:#0B1A33;--wm-ly:#D0451A" width="83" height="24"><use href="#wm"/></svg></a><nav aria-label="Your pages"><a class="on" aria-current="page">Today</a><a>First look</a><a>Ads</a><a>Sales</a><a>Ask</a><a>Settings</a></nav></header>
+<div class="banner">Demo: a fictional skincare brand, numbers made up, nothing is connected. <a href="/start">Start your own, 7 days free →</a></div>
+<main>
+<p class="topline">Noord Skin · Mon 12 Oct</p>
+<h1 class="greet">Good morning</h1>
 
-<p class="topline">Fika Ceramics · <span id="demo-date">Tue 7 Oct</span></p>
-<h1 id="greet">Good morning</h1>
-<p class="state">One thing needs your attention today.</p>
-<p class="health">4.7× overall, above your 3× target. Gift sets is losing money.</p>
+<div class="goal"><div class="g"><small>Your goal</small>Double sales this quarter</div><div class="p"><b>€11,400</b> of €26,000 · <b>54 days</b> left · <b>well ahead</b></div></div>
+<div class="bar"><i style="width:44%"></i></div>
+<p class="help">From here it needs <b>€270 a day</b> in sales. The last 7 days did <b>€766 a day</b>; at that pace the goal lands around 25 October, five weeks early.</p>
 
-<section class="today">
-  <div class="label">Today</div>
-  <p class="action">Pause Gift sets.</p>
-  <p class="evidence">€96.80 spent → €87.00 in sales · 0.9× return · target 3×</p>
-  <p class="reason">Two weeks below 1× on an ad almost nobody clicks; the one order was €87.</p>
-  <div class="moves"><a class="btn primary" href="/start">Pause Gift sets</a><a class="btn ghost small" href="/start">I did it myself</a><span class="help">One tap and Kalmly makes this change in Meta.</span></div>
+<section class="blk" id="update">
+<h2>Update <small>today's read of every campaign and ad set · last 7 days</small></h2>
+<p class="headline">Strong week, one tired ad.</p>
+<div class="totals num"><div><span>Last 7 days</span> <b>€1,020 → €5,365</b> <span>real sales ·</span> <b>5.3×</b> <span>· target 3×</span></div><div><span class="trend">Last 3 days: 5.0×</span></div></div>
+<p class="note">Orders matched to an ad set by country; the blended figure counts every order. Average order €46.</p>
+<div class="scroll"><table class="sets"><thead><tr><th>Ad set</th><th>Spent</th><th>Real sales</th><th>Sales per €1</th><th>Seen per person</th><th>State</th></tr></thead><tbody>
+<tr class="win"><td>Germany · broad<span class="mk">Scale</span></td><td>€312</td><td>41 orders · €1,870</td><td class="r">6.0×</td><td>1.3</td><td><span class="st win">Winning</span></td></tr>
+<tr class="warn"><td>UK · broad<span class="mk">Watch</span></td><td>€298</td><td>20 orders · €925</td><td class="r">3.1×</td><td>3.2</td><td><span class="st tired">Tired</span></td></tr>
+<tr><td>France · broad</td><td>€186</td><td>17 orders · €760</td><td class="r">4.1×</td><td>1.4</td><td><span class="st learn">Learning</span></td></tr>
+<tr><td>Warm · all countries</td><td>€140</td><td>22 orders · €1,010</td><td class="r">7.2×</td><td>2.4</td><td><span class="st ok">Leave it</span></td></tr>
+<tr><td>Cart abandoners</td><td>€84</td><td>17 orders · €800</td><td class="r">9.5×</td><td>3.0</td><td><span class="st ok">Leave it</span></td></tr>
+</tbody></table></div>
+<div class="finds">
+  <div class="find"><div class="k">Where to scale</div><h3>Germany</h3><p>It spends its full <b>€45 a day</b> at <b>6.0×</b>, and people have seen the ads only <b>1.3 times</b> each, so the next euros reach new people.</p><p>Raise <b>€45 → €54</b> (+20%), then read it again in 4 days.</p></div>
+  <div class="find"><div class="k">Watch</div><h3>UK</h3><p>The 5-week-old before-and-after serum video is seen <b>3.2 times</b> per person and its click rate fell from <b>1.9% to 1.0%</b>. The audience is tired, the country is fine.</p><p>Add a new ad beside it; keep the old one running.</p></div>
+  <div class="find"><div class="k">Your new creatives</div><h3>Where to test them</h3>
+    <table class="reels"><tr><td>15-second "morning routine" reel</td><td>540 likes · 61 saves</td></tr><tr><td style="border:0;padding-top:0" colspan="2">test in UK · broad</td></tr><tr><td>"Night set" gift ad</td><td>static, made switched off</td></tr><tr><td style="border:0;padding-top:0" colspan="2">test in Warm · all countries</td></tr><tr><td>Founder "why SPF daily"</td><td>new</td></tr><tr><td style="border:0;padding-top:0" colspan="2">test in Germany · broad</td></tr></table>
+    <p style="margin-top:8px">Judge each after <b>€40–60</b> spent.</p></div>
+</div>
 </section>
 
-<h2 class="k">Everything else</h2>
-<div class="rows">
-  <div class="row"><span class="name">Mugs</span><span class="ret">6.4×</span><span class="lab">Scale Thursday</span><span class="why">24 orders, untouched 19 days</span></div>
-  <div class="row"><span class="name">Workshops</span><span class="ret">5.8×</span><span class="lab">Leave it</span><span class="why">raised Friday, still learning</span></div>
-  <div class="row"><span class="name">Vases</span><span class="ret">2.7×</span><span class="lab">Getting tired</span><span class="why">seen 2.7 times per person</span></div>
-  <div class="row"><span class="name">Gift sets</span><span class="ret">0.9×</span><span class="lab">See above</span><span class="why"></span></div>
-  <div class="row"><span class="name">Candles</span><span class="ret">2.8×</span><span class="lab">Too early to tell</span><span class="why">3 orders, needs 5</span></div>
+<section class="blk" id="chat">
+<h2>Chat <small>Kalmly's suggestions arrive here; reply to ask why</small></h2>
+<div class="thread">
+  <div class="msg k"><span class="who">Kalmly · 08:02</span><p><b>Good morning. Your goal:</b> double sales this quarter. €11,400 of €26,000, 54 days left, well ahead.</p><p>Short today:</p><ol><li>Raise <b>Germany · broad</b> €45 → €54 a day.</li><li>Add the morning-routine reel beside the serum video in <b>UK · broad</b>.</li><li>Leave <b>France</b> alone until 7 days after its raise.</li></ol></div>
+  <div class="msg me"><span class="who">You · 09:12</span>why Germany and not France?</div>
+  <div class="msg k"><span class="who">Kalmly · 09:12</span><p>France is at 4.1× but was raised 6 days ago and is still learning; another change now restarts it. Germany brings €6 per €1 and has reached each person only 1.3 times: room to grow.</p></div>
 </div>
-
-<section class="acct">
-  <h2 class="k">Last 7 days</h2>
-  <div class="nums">
-    <div><small>Spent</small><b>€832</b></div>
-    <div><small>Sales</small><b>€3,899</b></div>
-    <div><small>Return</small><b>4.7×</b></div>
-    <div><small>Your target</small><b>3×</b></div>
-  </div>
-  <p class="more"><a href="#details" onclick="var d=document.getElementById('details');d.style.display=d.style.display==='block'?'none':'block';this.textContent=d.style.display==='block'?'Hide account details':'View account details';return false;">View account details</a></p>
-</section>
-<p class="checked">Checked today 08:02 · 7 days to 6 Oct</p>
-
-<section class="ask">
-  <label for="q">Ask Kalmly anything about your ads</label>
-  <div class="askrow"><input id="q" placeholder="e.g. can I raise Mugs this week?" readonly><a class="btn ink small" href="/start">Ask</a></div>
-  <div class="chat">
-    <div class="q">Can I raise Mugs this week?</div>
-    <div class="a"><div class="ahead">Kalmly · 08:14</div>
-      <p>Yes, on Thursday: from €45 to €54 a day. Mugs is at 6.4× on 24 orders, well above your 3× target, and its budget has been untouched for 19 days. Three days after today's pause keeps Meta's learning intact; raising both today would muddle what you learn from each.</p>
-    </div>
-  </div>
+<form class="compose" onsubmit="return false"><input placeholder="Ask about today's suggestions… (demo)" aria-label="Message Kalmly" disabled><a class="btn" href="/start">Send</a></form>
 </section>
 
-<div id="details" style="display:none">
-  <details class="sec"><summary>The numbers</summary><div class="inner">
-    <div class="tiles">
-      <div class="tile"><div class="k">Ad spend</div><div class="v">€832.20</div><div class="s">€118.40 yesterday · +4.1% vs the week before</div></div>
-      <div class="tile"><div class="k">Real sales</div><div class="v">€3,899.30</div><div class="s">50 orders · €612.00 yesterday · +9.7%</div></div>
-      <div class="tile"><div class="k">Real return</div><div class="v">4.7×</div><div class="s">sales ÷ ad spend · your target is 3×</div></div>
-      <div class="tile"><div class="k">Budgets switched on</div><div class="v">€127/day</div><div class="s">total across running ad sets</div></div>
-      <div class="tile"><div class="k">Click rate</div><div class="v">1.92%</div><div class="s">2,370 clicks on 123,400 views</div></div>
-      <div class="tile"><div class="k">Cost per click</div><div class="v">€0.35</div><div class="s">71,200 people reached</div></div>
-      <div class="tile"><div class="k">Times seen per person</div><div class="v">1.73×</div><div class="s">under 2.5 is healthy</div></div>
-      <div class="tile"><div class="k">Results Meta tracked</div><div class="v">41</div><div class="s">41 purchases by Meta's count (€2,610)</div></div>
-    </div>
-  </div></details>
-  <details class="sec"><summary>Per ad set <small>(5, last 7 days)</small></summary><div class="inner">
-    <table class="data stack"><thead><tr><th>Ad set</th><th>Status</th><th>Budget</th><th>Spent</th><th>Click rate</th><th>Seen/person</th><th>Results</th><th>Learning</th></tr></thead>
-    <tbody>
-    <tr><td class="main"><b>Mugs</b></td><td data-label="Status">on</td><td data-label="Budget">€45/day</td><td data-label="Spent">€318.40</td><td data-label="Click rate">2.1%</td><td data-label="Seen per person">1.6×</td><td data-label="Results">21 purchases</td><td data-label="Learning">stable</td></tr>
-    <tr><td class="main"><b>Workshops</b></td><td data-label="Status">on</td><td data-label="Budget">€30/day</td><td data-label="Spent">€207.15</td><td data-label="Click rate">1.9%</td><td data-label="Seen per person">1.5×</td><td data-label="Results">13 purchases</td><td data-label="Learning">learning</td></tr>
-    <tr><td class="main"><b>Vases</b></td><td data-label="Status">on</td><td data-label="Budget">€24/day</td><td data-label="Spent">€168.60</td><td data-label="Click rate">1.2%</td><td data-label="Seen per person">2.7×</td><td data-label="Results">5 purchases</td><td data-label="Learning">stable</td></tr>
-    <tr><td class="main"><b>Gift sets</b></td><td data-label="Status">on</td><td data-label="Budget">€14/day</td><td data-label="Spent">€96.80</td><td data-label="Click rate">0.9%</td><td data-label="Seen per person">1.9×</td><td data-label="Results">1 purchase</td><td data-label="Learning">learning limited</td></tr>
-    <tr><td class="main"><b>Candles</b></td><td data-label="Status">on</td><td data-label="Budget">€14/day</td><td data-label="Spent">€41.25</td><td data-label="Click rate">2.1%</td><td data-label="Seen per person">1.2×</td><td data-label="Results">1 purchase</td><td data-label="Learning">learning</td></tr>
-    </tbody></table>
-  </div></details>
-  <details class="sec"><summary>Your ads <small>(6, biggest spender first)</small></summary><div class="inner">
-    <div class="adgrid">
-      <div class="ad"><div class="ph">video · 12 d old</div><div class="m"><b>Mugs – hands video</b>€206 · 2.4% CTR · 15 purchases · €13.70 each</div></div>
-      <div class="ad"><div class="ph">video · 9 d old</div><div class="m"><b>Workshop – Saturday</b>€207 · 1.9% CTR · 13 purchases · €15.90 each</div></div>
-      <div class="ad"><div class="ph">image · 48 d old</div><div class="m"><b>Vases – price poster</b>€169 · 1.2% CTR · 5 purchases · €33.70 each</div></div>
-      <div class="ad"><div class="ph">image · 31 d old</div><div class="m"><b>Mugs – table shot</b>€112 · 1.6% CTR · 6 purchases · €18.70 each</div></div>
-      <div class="ad"><div class="ph">image · 20 d old</div><div class="m"><b>Gift sets – bundle</b>€97 · 0.9% CTR · 1 purchase · €96.80 each</div></div>
-      <div class="ad"><div class="ph">video · 4 d old</div><div class="m"><b>Candles – teaser</b>€41 · 2.1% CTR · 1 purchase · €41.25 each</div></div>
-    </div>
-    <div class="insight">
-      <h3>Creative insight: hands-on videos are selling.</h3>
-      <p><b>Your best ads:</b></p>
-      <ul><li>Mugs – hands video · video · 15 purchases by Meta's count, €13.70 each</li><li>Workshop – Saturday · video · 13 purchases by Meta's count, €15.90 each</li></ul>
-      <p><b>Try this next:</b> A 15-second video of hands shaping a vase, price in the caption, not on the image.</p>
-    </div>
-  </div></details>
-  <details class="sec"><summary>What's happening</summary><div class="inner story">
-    <p>Spend is up 4% and sales up 10% on last week, so the account is growing without strain: 1.7 views per person, nowhere near saturation. Mugs and Workshops carry the week. Gift sets has now lost money two weeks running on an ad nobody clicks, and the one order it brought was €87. Candles started four days ago; 3 orders say nothing yet.</p>
-    <h3>Your ads</h3>
-    <p>All six ads are delivering. The Vases poster is 48 days old and people have seen it 2.7 times; its click rate fell 31% over two weeks. It still returns 2.7×, so don't pause it; replace it.</p>
-    <h3>Next up</h3>
-    <p>Thursday: raise Mugs from €45 to €54 a day if it is still above 3×. Monday: judge Candles on a full week.</p>
-  </div></details>
-  <details class="sec"><summary>Earlier checks <small>(6)</small></summary><div class="inner"><p class="muted">The last six mornings, in full.</p></div></details>
-</div>
+<section class="blk" id="actions">
+<h2>Actions <small>from today's suggestion · before → after · when it is re-read</small></h2>
+<ul class="acts">
+  <li class="done"><div><span class="lvl">Ad set</span><span class="t">Raise the ad set Germany · broad</span><span class="ba"><b>€45 → €54</b> a day (+20%) · re-read <b>Fri 16 Oct</b></span></div><span class="st">done by you, 09:41</span></li>
+  <li><div><span class="lvl">Ad</span><span class="t">Add the morning-routine reel beside the serum video in the ad set UK · broad</span><span class="ba">the old ad stays on · judge the reel at about <b>€50</b> spent</span></div><a class="btn small" href="/start">Approve</a><a class="btn small ghost" href="/start">I did it myself</a></li>
+  <li><div><span class="lvl">Ad</span><span class="t">Test the Night set gift ad in the ad set Warm · all countries</span><span class="ba">created switched off · judge at about <b>€40–60</b> spent</span></div><a class="btn small ghost" href="/start">Approve</a><a class="btn small ghost" href="/start">I did it myself</a></li>
+</ul>
+<p class="rules"><b>What Approve does.</b> Kalmly makes exactly this change in Meta, <b>one change a day</b>, never more than <b>+20%</b> on a budget, never on an ad set edited in the last 3 days, still learning, or not spending its budget. It never pauses or edits a live ad, never switches on something that spends, and does nothing while a balance alert is open. A suggestion expires after 24 hours and is checked again at the tap.</p>
+</section>
 
-<div class="sticky-cta"><span>This is a demo. Your own numbers, tomorrow morning.</span><a class="btn primary" href="/start">Start free 7 days</a></div>
+<section class="blk" id="campaigns">
+<h2>Campaigns <small>last 7 days · click a row to open it</small></h2>
+<div class="camps">
+<div class="hd c7"><span></span><span>Campaign</span><span>Spent</span><span>Orders</span><span>Sales</span><span>Sales per €1<b>break-even 2× · target 3×</b></span><span>vs week before<b>sales per €1</b></span></div>
+<details class="c" open><summary><span class="car"></span><span class="nm">Sales · Europe<small>Campaign · Sales (purchases) · 5 ad sets on</small></span><span class="v num">€1,020</span><span class="v num">117</span><span class="v num">€5,365</span><span class="v r num">5.3×</span><span class="v num">+6%</span></summary><div class="sub"><div class="hd s9" style="padding-left:22px"><span></span><span>Ad sets</span><span>Budget / day<b>% spent, 7 d</b></span><span>Spent</span><span>Orders · sales</span><span>Checkouts started</span><span>Cost per order</span><span>Sales per €1<b>break-even 2× · target 3×</b></span><span>Seen<b>per person</b></span><span>State<b>learning · age · last edit</b></span></div><details class="s" open><summary><span class="car"></span><span class="nm">Germany · broad<small>Ad set</small></span><span class="v num">€45<small>100% spent</small></span><span class="v num">€312</span><span class="v num">41 · €1,870</span><span class="v num">118</span><span class="v num">€7.60</span><span class="v r num">6.0×</span><span class="v num">1.3</span><span class="chipcell"><span class="st win">Winning</span><span class="meta">stable · 48 d · edited 12 d ago</span></span></summary><div class="sub"><div class="hd s9" style="padding-left:44px"><span></span><span>Ads</span><span>Spent</span><span>Checkouts started</span><span>Cost per result</span><span>Clicked through<b>to the site</b></span><span>Watched<b>past 3 s</b></span><span>Seen<b>per person</b></span><span>Age</span><span>State</span></div><div class="a"><span></span><span class="nm">Vitamin C serum · video<small>Ad</small><span class="flag">carries 60% of the set</span></span><span class="v num">€188</span><span class="v num">52</span><span class="v num">€3.60</span><span class="v num">2.1%<small>steady</small></span><span class="v num">44%</span><span class="v num">1.3</span><span class="v num">31 d</span><span class="chipcell"><span class="st win">Winning</span></span></div><div class="a"><span></span><span class="nm">Cleansing balm · carousel<small>Ad</small></span><span class="v num">€86</span><span class="v num">21</span><span class="v num">€4.10</span><span class="v num">1.6%</span><span class="v num">—</span><span class="v num">1.2</span><span class="v num">18 d</span><span class="chipcell"><span class="st ok">On track</span></span></div><div class="a"><span></span><span class="nm">SPF 50 daily · static<small>Ad</small></span><span class="v num">€38</span><span class="v num">7</span><span class="v num">€5.40</span><span class="v num">1.4%</span><span class="v num">—</span><span class="v num">1.1</span><span class="v num">6 d</span><span class="chipcell"><span class="st early">Too early</span></span></div></div></details><details class="s"><summary><span class="car"></span><span class="nm">UK · broad<small>Ad set</small></span><span class="v num">€35<small>100% spent</small></span><span class="v num">€298</span><span class="v num">20 · €925</span><span class="v num">66</span><span class="v num">€14.90</span><span class="v r num">3.1×</span><span class="v num">3.2</span><span class="chipcell"><span class="st tired">Tired</span><span class="meta">stable · 35 d · edited 35 d ago</span></span></summary><div class="sub"><div class="hd s9" style="padding-left:44px"><span></span><span>Ads</span><span>Spent</span><span>Checkouts started</span><span>Cost per result</span><span>Clicked through<b>to the site</b></span><span>Watched<b>past 3 s</b></span><span>Seen<b>per person</b></span><span>Age</span><span>State</span></div><div class="a"><span></span><span class="nm">Before/after serum · video<small>Ad</small><span class="flag">carries 81% of the set</span></span><span class="v num">€240</span><span class="v num">31</span><span class="v num">€7.70</span><span class="v num">1.0%<small>↓ from 1.9%</small></span><span class="v num">19%</span><span class="v num">3.2</span><span class="v num">35 d</span><span class="chipcell"><span class="st tired">Tired</span></span></div><div class="a"><span></span><span class="nm">Morning-routine reel · 15 s<small>Ad</small></span><span class="v num">€0</span><span class="v num">—</span><span class="v num">—</span><span class="v num">—</span><span class="v num">—</span><span class="v num">—</span><span class="v num">new</span><span class="chipcell"><span class="st early">New · switched off</span></span></div></div></details><details class="s"><summary><span class="car"></span><span class="nm">France · broad<small>Ad set</small></span><span class="v num">€28<small>95% spent</small></span><span class="v num">€186</span><span class="v num">17 · €760</span><span class="v num">49</span><span class="v num">€10.90</span><span class="v r num">4.1×</span><span class="v num">1.4</span><span class="chipcell"><span class="st learn">Learning</span><span class="meta">learning · 29 d · edited 6 d ago</span></span></summary></details><details class="s"><summary><span class="car"></span><span class="nm">Warm · all countries<small>Ad set</small></span><span class="v num">€20<small>100% spent</small></span><span class="v num">€140</span><span class="v num">22 · €1,010</span><span class="v num">61</span><span class="v num">€6.40</span><span class="v r num">7.2×</span><span class="v num">2.4</span><span class="chipcell"><span class="st ok">Leave it</span><span class="meta">stable · 62 d · edited 20 d ago</span></span></summary></details><details class="s"><summary><span class="car"></span><span class="nm">Cart abandoners<small>Ad set</small></span><span class="v num">€12<small>100% spent</small></span><span class="v num">€84</span><span class="v num">17 · €800</span><span class="v num">40</span><span class="v num">€4.90</span><span class="v r num">9.5×</span><span class="v num">3.0</span><span class="chipcell"><span class="st ok">Leave it</span><span class="meta">stable · 62 d · edited 20 d ago</span></span></summary></details></div></details>
 </div>
-<script>
-(function(){
-  try { document.getElementById("demo-date").textContent = new Date().toLocaleDateString("en-GB", {weekday:"short", day:"numeric", month:"short"}); } catch (e) {}
-  var h = new Date().getHours(); document.getElementById("greet").textContent = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
-})();
-</script>
+</section>
+
+<div class="checked">Checked Mon 12 Oct 08:02 · 7 days to 11 Oct · judged on real orders from Shopify</div>
+<p class="foot">In your own page this link is your login. This one is a demo: nothing here is connected.</p>
+<div class="sticky-cta"><span>This is a demo · a fictional shop. Your own numbers, tomorrow morning.</span><a class="btn primary" href="/start">Start free 7 days</a></div>
+</main>
+</div>
 <script>(function(){var h=location.hostname;if(h.endsWith("kalmly.io")&&h.indexOf("app.")!==0||h.endsWith("github.io")){document.querySelectorAll('a[href^="/start"]').forEach(function(a){a.href="https://app.kalmly.io"+a.getAttribute("href");});}})();</script>
 </body></html>
