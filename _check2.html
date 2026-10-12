@@ -1,0 +1,5 @@
+<!doctype html><meta charset="utf-8"><pre id="out">pending</pre>
+<script>
+const srcs=["/?t=9000","/"]; let out=[], todo=0;
+for(const s of srcs){ todo++; const f=document.createElement("iframe"); f.width=360; f.height=900; f.src=s; f.onload=()=>{ const d=f.contentDocument; const W=360; const bad=[]; d.querySelectorAll("body *").forEach(el=>{ const r=el.getBoundingClientRect(); if(r.right>W+1 && r.width>0){ let anc=el, hid=false; while(anc && anc!==d.body){ const o=getComputedStyle(anc).overflowX; if(o==="hidden"||o==="clip"||o==="auto"||o==="scroll"){hid=true;break;} anc=anc.parentElement; } if(!hid) bad.push(el.tagName.toLowerCase()+(el.id?"#"+el.id:"")+(el.className&&typeof el.className==="string"?"."+el.className.trim().split(/\s+/).slice(0,2).join("."):"")+" right="+Math.round(r.right)+" w="+Math.round(r.width)); } }); out.push(s+" doc="+d.documentElement.scrollWidth+"\n  "+bad.slice(0,12).join("\n  ")); if(--todo===0) document.getElementById("out").textContent=out.join("\n"); }; document.body.appendChild(f); }
+</script>

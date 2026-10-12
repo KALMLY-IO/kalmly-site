@@ -28,9 +28,8 @@ state without JavaScript or with prefers-reduced-motion. No build step: this fil
 <meta name="twitter:title" content="Meta tells you what happened. Kalmly tells you what to do.">
 <meta name="twitter:description" content="Meta ads, planned and judged on your shop's sales. A plan the moment you connect, then one decision every morning. From €39/month.">
 <meta name="twitter:image" content="https://kalmly.io/og.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<link rel="preload" href="/fonts/bricolage-var-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/instrument-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kalmly","url":"https://kalmly.io/","applicationCategory":"BusinessApplication","operatingSystem":"Web",
@@ -614,9 +613,9 @@ footer.dark{background:#0B1A33;border-top-color:rgba(255,255,255,.12)}
       <div><a class="brand" href="/" aria-label="Kalmly"><svg class="wm" viewBox="0 0 660 190" style="--wm-k:#F3F6FB;--wm-ly:#D0451A" width="90" height="26"><use href="#wm"/></svg></a><span style="margin-top:12px;max-width:30ch">Meta tells you what happened. Kalmly tells you what to do.</span><span style="max-width:30ch">Meta ads, planned and judged on your shop's sales.</span></div>
       <div><b>Product</b><a href="/#morning">How it works</a><a href="/pricing/">Pricing</a><a href="/demo/">Demo dashboard</a><a href="/login">Log in</a><a href="/start">Start free</a></div>
       <div><b>Company</b><span>Built in Amsterdam, founded 2026</span><a href="mailto:hello@kalmly.io">hello@kalmly.io</a><a href="https://www.linkedin.com/company/kalmly-io" rel="noopener noreferrer">LinkedIn</a></div>
-      <div><b>Legal</b><a href="/privacy">Privacy policy</a><a href="/terms">Terms of service</a><span>[legal entity] · KvK [number]</span></div>
+      <div><b>Legal</b><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/dpa/">Data processing</a></div>
     </div>
-    <div class="bottom"><span>© 2026 Kalmly</span><span>Meta tells you what happened. Kalmly tells you what to do.</span></div>
+    <div class="bottom"><span>© 2026 Kalmly · <a href="mailto:hello@kalmly.io" style="display:inline;margin:0">hello@kalmly.io</a></span><span>Meta tells you what happened. Kalmly tells you what to do.</span></div>
   </div>
 </footer>
 
@@ -694,7 +693,7 @@ window.addEventListener('DOMContentLoaded', function () {
 (function(){
   var h = location.hostname;
   if (h.endsWith("kalmly.io") && h.indexOf("app.") !== 0 || h.endsWith("github.io")) {
-    document.querySelectorAll('a[href^="/start"],a[href^="/login"],a[href^="/privacy"],a[href^="/terms"]').forEach(function(a){
+    document.querySelectorAll('a[href^="/start"],a[href^="/login"]').forEach(function(a){
       a.href = "https://app.kalmly.io" + a.getAttribute("href");
     });
   }

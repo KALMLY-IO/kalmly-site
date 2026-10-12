@@ -12,9 +12,8 @@
 <meta property="og:type" content="website"><meta property="og:site_name" content="Kalmly">
 <meta property="og:title" content="Kalmly pricing"><meta property="og:description" content="From €39 a month. 7-day free trial, view-only unless you switch on approvals, cancel anytime."><meta property="og:image" content="https://kalmly.io/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://kalmly.io/pricing/">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Kalmly pricing"><meta name="twitter:description" content="From €39 a month. 7-day free trial, cancel anytime."><meta name="twitter:image" content="https://kalmly.io/og.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<link rel="preload" href="/fonts/bricolage-var-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/instrument-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
 /* Royal: royal-blue bands with paper sheets, navy nav and footer. Orange only on the logo's "ly", the one primary button and the action marker. */
 :root{
@@ -337,9 +336,9 @@ footer .bottom{border-top:1px solid var(--rule-dw);margin-top:26px;padding-top:1
       <div><a class="brand" href="/" aria-label="Kalmly"><svg class="wm" viewBox="0 0 660 190" style="--wm-k:#F3F6FB;--wm-ly:#D0451A" width="90" height="26"><use href="#wm"/></svg></a><span style="margin-top:12px;max-width:30ch">Meta tells you what happened. Kalmly tells you what to do.</span><span style="max-width:30ch">Meta ads, planned and judged on your shop's sales.</span></div>
       <div><b>Product</b><a href="/#how">How it works</a><a href="/pricing/">Pricing</a><a href="/demo/">Demo dashboard</a><a href="/login">Log in</a><a href="/start">Start free</a></div>
       <div><b>Company</b><span>Built in Amsterdam, founded 2026</span><a href="mailto:hello@kalmly.io">hello@kalmly.io</a><a href="https://www.linkedin.com/company/kalmly-io" rel="noopener noreferrer">LinkedIn</a></div>
-      <div><b>Legal</b><a href="/privacy">Privacy policy</a><a href="/terms">Terms of service</a><span>[legal entity] · KvK [number]</span></div>
+      <div><b>Legal</b><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/dpa/">Data processing</a></div>
     </div>
-    <div class="bottom"><span>© 2026 Kalmly</span><span>Meta tells you what happened. Kalmly tells you what to do.</span></div>
+    <div class="bottom"><span>© 2026 Kalmly · <a href="mailto:hello@kalmly.io" style="display:inline;margin:0">hello@kalmly.io</a></span><span>Meta tells you what happened. Kalmly tells you what to do.</span></div>
   </div>
 </footer>
 
@@ -365,7 +364,7 @@ footer .bottom{border-top:1px solid var(--rule-dw);margin-top:26px;padding-top:1
   if (window.matchMedia("(pointer: fine)").matches) document.querySelectorAll(".plan").forEach(function (c) { c.addEventListener("pointermove", function (e) { var r = c.getBoundingClientRect(); c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px"); }); });
   var h = location.hostname;
   if (h.endsWith("kalmly.io") && h.indexOf("app.") !== 0 || h.endsWith("github.io")) {
-    document.querySelectorAll('a[href^="/start"],a[href^="/login"],a[href^="/privacy"],a[href^="/terms"]').forEach(function(a){ a.href = "https://app.kalmly.io" + a.getAttribute("href"); });
+    document.querySelectorAll('a[href^="/start"],a[href^="/login"]').forEach(function(a){ a.href = "https://app.kalmly.io" + a.getAttribute("href"); });
   }
 })();
 </script>
